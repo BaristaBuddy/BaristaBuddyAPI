@@ -19,7 +19,7 @@ namespace BaristaBuddyApi.Data
         {
             modelBuilder.Entity<Store>()
                 .HasData(
-                new Store { Id = 1, City = "iowa city", state = "iowa", Name = "matt's Place", StreetAddress = "1918 H st", Zip = "52240" }
+                new Store { Id = 1, City = "iowa city", State = "iowa", Name = "matt's Place", StreetAddress = "1918 H st", Zip = "52240" }
                 
                 );
 

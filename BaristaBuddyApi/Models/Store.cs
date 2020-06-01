@@ -21,14 +21,14 @@ namespace BaristaBuddyApi.Models
         public string City { get; set; }
 
         [Required]
-        public string state { get; set; }
+        public string State { get; set; }
         [Required]
 
         public string Zip { get; set; }
         
         public string Phone { get; set; }
 
-        public string WebSiteUrl { get; set; }
+        public string WebsiteUrl { get; set; }
 
         public string StoreImageUrl { get; set; }
 
