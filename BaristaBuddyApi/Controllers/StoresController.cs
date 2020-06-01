@@ -26,7 +26,14 @@ namespace BaristaBuddyApi.Controllers
         public ActionResult<Store> GetStore()
         {
             var store = new Store
-            { Id = 1, City = "iowa city", state = "iowa", Name = "matt's Place", StreetAddress = "1918 H st", Zip = "52240" };
+            {
+                Id = 1,
+                City = "iowa city",
+                state = "iowa",
+                Name = "matt's Place",
+                StreetAddress = "1918 H st",
+                Zip = "52240"
+            };
 
             return store;
 
