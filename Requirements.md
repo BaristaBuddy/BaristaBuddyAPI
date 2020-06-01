@@ -11,22 +11,22 @@
 - As a cafe owner I would like to be able to offer my customers menu item modifications.
 
 ## Feature Tasks
-[ ] CREATE database
-[ ] POST to database
-[ ] Explore avenues for advertising
-[ ] GET table information for the user
-[ ] PUT database items
-[ ] Explore incentives for user
-[ ] Link to eCommerce API
-[ ] Include images in the database
-[ ] DELETE database items
-[ ] Join tables
+- [ ] CREATE database
+- [ ] POST to database
+- [ ] Explore avenues for advertising
+- [ ] GET table information for the user
+- [ ] PUT database items
+- [ ] Explore incentives for user
+- [ ] Link to eCommerce API
+- [ ] Include images in the database
+- [ ] DELETE database items
+- [ ] Join tables
 
 ## Acceptance Criteria
-[ ] Be able to POST from the MVC side and API side
-[ ] Be able to PUT from the MVC side and API side
-[ ] Be able to GET from the MVC side and API side
-[ ] Be able to DELETE from the MVC side and API side
-[ ] Establish working connection with Stripe API
-[ ] Have a table column for image URLs
-[ ] Create potential advertisements
+- [ ] Be able to POST from the MVC side and API side
+- [ ] Be able to PUT from the MVC side and API side
+- [ ] Be able to GET from the MVC side and API side
+- [ ] Be able to DELETE from the MVC side and API side
+- [ ] Establish working connection with Stripe API
+- [ ] Have a table column for image URLs
+- [ ] Create potential advertisements
