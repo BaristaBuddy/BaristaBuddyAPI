@@ -19,9 +19,33 @@ namespace BaristaBuddyApi.Data
         {
             modelBuilder.Entity<Store>()
                 .HasData(
-                new Store { Id = 1, City = "iowa city", State = "iowa", Name = "matt's Place", StreetAddress = "1918 H st", Zip = "52240" }
-                
-                );
+                new Store 
+                {
+                    Id = 1,
+                    City = "Iowa City",
+                    State = "Iowa",
+                    Name = "Matt's Place",
+                    StreetAddress = "1918 H St.",
+                    Zip = "52240" 
+                },
+                new Store
+                {
+                    Id = 2,
+                    City = "Cedar Rapids",
+                    State = "Iowa",
+                    Name = "Roastopia",
+                    StreetAddress = "1313 1st Ave.",
+                    Zip = "52240"
+                },
+                new Store
+                {
+                    Id = 3,
+                    City = "Des Moines",
+                    State = "Iowa",
+                    Name = "King Keith's Cafe",
+                    StreetAddress = "121 Dodge St.",
+                    Zip = "52240"
+                });
 
         }
 
