@@ -77,13 +77,11 @@ namespace BaristaBuddyApi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public /*async*/ Task<ActionResult<Store>> PostStore(Store store)
+        public async Task<ActionResult<Store>> PostStore(Store store)
         {
-            return default;
-            //_context.Store.Add(store);
-            //await _context.SaveChangesAsync();
+            await storeRepository.SaveNewStore(store);
 
-            //return CreatedAtAction("GetStore", new { id = store.Id }, store);
+            return CreatedAtAction("GetStore", new { id = store.Id }, store);
         }
 
         // DELETE: api/Stores/5

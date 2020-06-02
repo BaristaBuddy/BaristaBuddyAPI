@@ -1,6 +1,7 @@
 ﻿using BaristaBuddyApi.Data;
 using BaristaBuddyApi.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -79,10 +80,17 @@ namespace BaristaBuddyApi.Repositories
             return store;
         }
 
-        public Task<StoreDTO> SaveNewHotel(Store store)
+    
+
+        public async  Task<StoreDTO> SaveNewStore(Store store)
         {
-            throw new System.NotImplementedException();
+            _context.Store.Add(store);
+            await _context.SaveChangesAsync();
+
+            return await GetOneSTore(store.Id);
         }
+
+      
 
         public Task<bool> UpdateStore(int id, Store store)
         {
