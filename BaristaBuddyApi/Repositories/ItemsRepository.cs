@@ -21,6 +21,11 @@ namespace BaristaBuddyApi.Repositories
             this._context = _context;
         }
 
+        public Task<ItemDTO> DeleteItem(int storeId, int itemId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<ItemDTO>> GetAllItems(int storeId)
         {
             var allItems = await _context.Item
@@ -60,9 +65,23 @@ namespace BaristaBuddyApi.Repositories
             return oneItem;
         }
 
-        public Task<ItemDTO> SaveNewItem(CreateItem createItem, int storeId)
+        public async Task<ItemDTO> SaveNewItem(CreateItem createItemData, int storeId)
         {
-            throw new NotImplementedException();
+            var newItem = new Item
+            {
+                StoreId = storeId,
+                ItemId = createItemData.ItemId,
+                Name = createItemData.Name,
+                Ingredients = createItemData.Ingredients,
+                ImageUrl = createItemData.ImageUrl,
+                Price = createItemData.Price
+            };
+
+            _context.Item.Add(newItem);
+            await _context.SaveChangesAsync();
+
+            var itemToRetun = await GetOneItem(storeId, createItemData.ItemId);
+            return itemToRetun;
         }
 
         public async Task<bool> UpdateItem(int storeId, int itemId, Item item)

@@ -49,7 +49,7 @@ namespace BaristaBuddyApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutItem(int storeId, int itemId, Item item)
         {
-            if (id != item.ItemId)
+            if (itemId != item.ItemId)
             {
                 return BadRequest();
             }
@@ -74,23 +74,19 @@ namespace BaristaBuddyApi.Controllers
 
             return CreatedAtAction("GetItem", new { id = createItem.ItemId }, createItem);
         }
-        /*
+        
         // DELETE: api/Stores/{storeId}/Items/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Item>> DeleteItem(int id)
+        public async Task<ActionResult<ItemDTO>> DeleteItem(int storeId, int itemId)
         {
-            var item = await _context.Item.FindAsync(id);
+            var item = await itemRepository.DeleteItem(storeId, itemId)
             if (item == null)
             {
                 return NotFound();
             }
-
-            _context.Item.Remove(item);
-            await _context.SaveChangesAsync();
-
             return item;
         }
 
-      */
+      
     }
 }

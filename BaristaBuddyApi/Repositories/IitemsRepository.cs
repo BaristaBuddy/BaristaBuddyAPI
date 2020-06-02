@@ -11,5 +11,6 @@ namespace BaristaBuddyApi.Repositories
         Task<ItemDTO> GetOneItem(int storeId, int itemId);
         Task<bool> UpdateItem(int storeId, int itemId, Item item);
         Task<ItemDTO> SaveNewItem(CreateItem createItem, int storeId);
+        Task<ItemDTO> DeleteItem(int storeId, int itemId);
     }
 }
