@@ -30,10 +30,10 @@ namespace BaristaBuddyApi.Controllers
         }
 
         // GET: api/Items/5
-        /*[HttpGet("{id}")]
-        public async Task<ActionResult<Item>> GetItem(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ItemDTO>> GetItem(int id)
         {
-            var item = await _context.Item.FindAsync(id);
+            var item = await itemRepository.GetOneItem(id);
 
             if (item == null)
             {
@@ -42,7 +42,7 @@ namespace BaristaBuddyApi.Controllers
 
             return item;
         }
-
+        /*
         // PUT: api/Items/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.

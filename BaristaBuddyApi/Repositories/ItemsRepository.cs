@@ -37,5 +37,10 @@ namespace BaristaBuddyApi.Repositories
 
             return allItems;
         }
+
+        public Task<ItemDTO> GetOneItem(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
