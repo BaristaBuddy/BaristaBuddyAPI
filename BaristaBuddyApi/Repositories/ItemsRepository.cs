@@ -65,7 +65,7 @@ namespace BaristaBuddyApi.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<bool> UpdateItem(int id, Item item)
+        public async Task<bool> UpdateItem(int storeId, int itemId, Item item)
         {
             _context.Entry(item).State = EntityState.Modified;
 
@@ -76,7 +76,7 @@ namespace BaristaBuddyApi.Repositories
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ItemExists(id))
+                if (!ItemExists(itemId))
                 {
                     return false;
                 }
