@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BaristaBuddyApi.Data;
 using BaristaBuddyApi.Models;
+using BaristaBuddyApi.Repositories;
 
 namespace BaristaBuddyApi.Controllers
 {
@@ -14,18 +15,18 @@ namespace BaristaBuddyApi.Controllers
     [ApiController]
     public class ItemsController : ControllerBase
     {
-        private readonly BaristaBuddyDbContext _context;
+        IitemsRepository ItemRepository;
 
-        public ItemsController(BaristaBuddyDbContext context)
+        public ItemsController(IitemsRepository ItemRepository)
         {
-            _context = context;
+            this.ItemRepository = ItemRepository;
         }
 
         // GET: api/Items
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Item>>> GetItem()
+        public async Task<ActionResult<IEnumerable<Item>>> GetAllItems()
         {
-            return await _context.Item.ToListAsync();
+            return Ok(await ItemRepository.GetAllItems());
         }
 
         // GET: api/Items/5
