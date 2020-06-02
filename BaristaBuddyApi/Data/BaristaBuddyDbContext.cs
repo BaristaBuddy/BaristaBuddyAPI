@@ -46,9 +46,23 @@ namespace BaristaBuddyApi.Data
                     StreetAddress = "121 Dodge St.",
                     Zip = "52240"
                 });
+            modelBuilder.Entity<Item>()
+                .HasKey(Item => new
+                {
+                    Item.ItemId,
+                    Item.StoreId
+                });
+            modelBuilder.Entity<Item>()
+                .HasData(
+                new Item { ItemId = 1, StoreId = 1, Name = "Brennan's Hot Chocolate", Ingredients = "Almond Milk, Cocoa nibs, Honey, Cinnamon", Price = 3.13 },
+                new Item { ItemId = 2, StoreId = 1, Name = "Matt's Espresso Macchiato", Price = 4.17 },
+                new Item { ItemId = 3, StoreId = 2, Name = "Sihem's Caramel Latte", Price = 4.00 },
+                new Item { ItemId = 4, StoreId = 3, Name = "James's Triple Death", Ingredients = "Enough caffiene to kill a small horse", Price = 6.66 }
+                );
 
         }
 
         public DbSet<Store> Store { get; set; }
+        public DbSet<Item> Item { get; set; }
     }
 }
