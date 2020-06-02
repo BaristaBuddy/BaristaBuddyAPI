@@ -1,6 +1,7 @@
 ﻿using BaristaBuddyApi.Data;
 using BaristaBuddyApi.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,9 +58,31 @@ namespace BaristaBuddyApi.Repositories
             return oneItem;
         }
 
-        public Task<bool> UpdateItem(int id, Item item)
+        public async Task<bool> UpdateItem(int id, Item item)
         {
-            throw new NotImplementedException();
+            _context.Entry(item).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ItemExists(id))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+        private bool ItemExists(int id)
+        {
+            return _context.Item.Any(e => e.ItemId == id);
         }
     }
 }
