@@ -3,14 +3,16 @@ using BaristaBuddyApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BaristaBuddyApi.Migrations
 {
     [DbContext(typeof(BaristaBuddyDbContext))]
-    partial class BaristaBuddyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200601233526_ChangedPropertyCapitalization")]
+    partial class ChangedPropertyCapitalization
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,28 +64,10 @@ namespace BaristaBuddyApi.Migrations
                         new
                         {
                             Id = 1,
-                            City = "Iowa City",
-                            Name = "Matt's Place",
-                            State = "Iowa",
-                            StreetAddress = "1918 H St.",
-                            Zip = "52240"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            City = "Cedar Rapids",
-                            Name = "Roastopia",
-                            State = "Iowa",
-                            StreetAddress = "1313 1st Ave.",
-                            Zip = "52240"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            City = "Des Moines",
-                            Name = "King Keith's Cafe",
-                            State = "Iowa",
-                            StreetAddress = "121 Dodge St.",
+                            City = "iowa city",
+                            Name = "matt's Place",
+                            State = "iowa",
+                            StreetAddress = "1918 H st",
                             Zip = "52240"
                         });
                 });

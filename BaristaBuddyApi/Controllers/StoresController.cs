@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BaristaBuddyApi.Data;
 using BaristaBuddyApi.Models;
+using BaristaBuddyApi.Repositories;
 
 namespace BaristaBuddyApi.Controllers
 {
@@ -14,28 +15,18 @@ namespace BaristaBuddyApi.Controllers
     [ApiController]
     public class StoresController : ControllerBase
     {
-        private readonly BaristaBuddyDbContext _context;
+        IStoreRepository storeRepository;
 
-        public StoresController(BaristaBuddyDbContext context)
+        public StoresController(IStoreRepository storeRepository)
         {
-            _context = context;
+            this.storeRepository = storeRepository;
         }
 
         // GET: api/Stores
         [HttpGet]
-        public ActionResult<Store> GetStore()
+        public async Task<ActionResult<IEnumerable<Store>>> GetStores()
         {
-            var store = new Store
-            {
-                Id = 1,
-                City = "iowa city",
-                state = "iowa",
-                Name = "matt's Place",
-                StreetAddress = "1918 H st",
-                Zip = "52240"
-            };
-
-            return store;
+            return Ok(await storeRepository.GetAllStores());
 
         }
 
@@ -43,14 +34,14 @@ namespace BaristaBuddyApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Store>> GetStore(int id)
         {
-            var store = await _context.Store.FindAsync(id);
+            //var store = await storeRepository.GetOneHotel(id);
 
-            if (store == null)
-            {
-                return NotFound();
-            }
+            //if (store == null)
+            //{
+            //    return NotFound();
+            //}
 
-            return store;
+            return default;
         }
 
         // PUT: api/Stores/5
@@ -59,28 +50,28 @@ namespace BaristaBuddyApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStore(int id, Store store)
         {
-            if (id != store.Id)
-            {
-                return BadRequest();
-            }
+            //if (id != store.Id)
+            //{
+            //    return BadRequest();
+            //}
 
-            _context.Entry(store).State = EntityState.Modified;
+            //_context.Entry(store).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!StoreExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            //try
+            //{
+            //    await _context.SaveChangesAsync();
+            //}
+            //catch (DbUpdateConcurrencyException)
+            //{
+            //    if (!StoreExists(id))
+            //    {
+            //        return NotFound();
+            //    }
+            //    else
+            //    {
+            //        throw;
+            //    }
+            //}
 
             return NoContent();
         }
@@ -91,31 +82,33 @@ namespace BaristaBuddyApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Store>> PostStore(Store store)
         {
-            _context.Store.Add(store);
-            await _context.SaveChangesAsync();
+            return default;
+            //_context.Store.Add(store);
+            //await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetStore", new { id = store.Id }, store);
+            //return CreatedAtAction("GetStore", new { id = store.Id }, store);
         }
 
         // DELETE: api/Stores/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Store>> DeleteStore(int id)
         {
-            var store = await _context.Store.FindAsync(id);
-            if (store == null)
-            {
-                return NotFound();
-            }
+            //var store = await _context.Store.FindAsync(id);
+            //if (store == null)
+            //{
+            //    return NotFound();
+            //}
 
-            _context.Store.Remove(store);
-            await _context.SaveChangesAsync();
+            //_context.Store.Remove(store);
+            //await _context.SaveChangesAsync();
 
-            return store;
+            //return store;
+            return default;
         }
 
-        private bool StoreExists(int id)
-        {
-            return _context.Store.Any(e => e.Id == id);
-        }
+        //private bool StoreExists(int id)
+        //{
+        //    return _context.Store.Any(e => e.Id == id);
+        //}
     }
 }
