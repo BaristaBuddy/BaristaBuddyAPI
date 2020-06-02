@@ -1,7 +1,9 @@
 ﻿using BaristaBuddyApi.Data;
 using BaristaBuddyApi.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BaristaBuddyApi.Repositories
@@ -18,9 +20,22 @@ namespace BaristaBuddyApi.Repositories
             this._context = _context;
         }
 
-        public Task<IEnumerable<Item>> GetAllItems()
+        public async Task<IEnumerable<Item>> GetAllItems()
         {
-            throw new NotImplementedException();
+            var allItems = await _context.Item
+                .Select(item => new Item
+                {
+                    ItemId = item.ItemId,
+                    StoreId = item.StoreId,
+                    Name = item.Name,
+                    Ingredients = item.Ingredients,
+                    ImageUrl = item.ImageUrl,
+                    Price = item.Price
+                }
+                
+                ).ToListAsync();
+
+            return allItems;
         }
     }
 }

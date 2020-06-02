@@ -15,22 +15,22 @@ namespace BaristaBuddyApi.Controllers
     [ApiController]
     public class ItemsController : ControllerBase
     {
-        IitemsRepository ItemRepository;
+        IitemsRepository itemRepository;
 
-        public ItemsController(IitemsRepository ItemRepository)
+        public ItemsController(IitemsRepository itemRepository)
         {
-            this.ItemRepository = ItemRepository;
+            this.itemRepository = itemRepository;
         }
 
         // GET: api/Items
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Item>>> GetAllItems()
         {
-            return Ok(await ItemRepository.GetAllItems());
+            return Ok(await itemRepository.GetAllItems());
         }
 
         // GET: api/Items/5
-        [HttpGet("{id}")]
+        /*[HttpGet("{id}")]
         public async Task<ActionResult<Item>> GetItem(int id)
         {
             var item = await _context.Item.FindAsync(id);
@@ -106,6 +106,6 @@ namespace BaristaBuddyApi.Controllers
         private bool ItemExists(int id)
         {
             return _context.Item.Any(e => e.ItemId == id);
-        }
+        }*/
     }
 }
