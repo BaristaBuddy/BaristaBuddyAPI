@@ -16,9 +16,23 @@ namespace BaristaBuddyApi.Repositories
             _context = context;
         }
 
-        public Task<StoreDTO> DeleteHotel(int id)
+        public async Task<StoreDTO> DeleteStore(int id)
         {
-            throw new System.NotImplementedException();
+            var store = await _context.Store.FindAsync(id);
+
+            if (store == null)
+            {
+                return null;
+            }
+
+            var storeToReturn = await GetOneSTore(id);
+
+            _context.Store.Remove(store);
+
+            await _context.SaveChangesAsync();
+
+            return storeToReturn;
+
         }
 
         public async Task<IEnumerable<StoreDTO>> GetAllStores()

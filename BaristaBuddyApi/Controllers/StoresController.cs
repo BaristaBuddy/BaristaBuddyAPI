@@ -88,24 +88,18 @@ namespace BaristaBuddyApi.Controllers
 
         // DELETE: api/Stores/5
         [HttpDelete("{id}")]
-        public /*async*/ Task<ActionResult<Store>> DeleteStore(int id)
+        public async Task<ActionResult<StoreDTO>> DeleteStore(int id)
         {
-            //var store = await _context.Store.FindAsync(id);
-            //if (store == null)
-            //{
-            //    return NotFound();
-            //}
+            var store = await storeRepository.DeleteStore(id);
 
-            //_context.Store.Remove(store);
-            //await _context.SaveChangesAsync();
+            if (store == null)
+            {
+                return NotFound();
 
-            //return store;
-            return default;
+            }
+            return store;
         }
 
-        //private bool StoreExists(int id)
-        //{
-        //    return _context.Store.Any(e => e.Id == id);
-        //}
+      
     }
 }
