@@ -12,6 +12,7 @@
     <WebStackScaffolding_DbContextTypeFullName>BaristaBuddyApi.Data.BaristaBuddyDbContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <ActiveDebugProfile>BaristaBuddyApi</ActiveDebugProfile>
+    <NameOfLastUsedPublishProfile>BaristaBuddyAPI</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>

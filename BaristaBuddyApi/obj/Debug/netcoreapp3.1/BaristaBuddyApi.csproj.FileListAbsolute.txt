@@ -294,3 +294,5 @@ C:\Users\mcb4r\OneDrive\Desktop\github\code-401\BaristaBuddy\BaristaBuddyAPI\Bar
 C:\Users\mcb4r\OneDrive\Desktop\github\code-401\BaristaBuddy\BaristaBuddyAPI\BaristaBuddyApi\obj\Debug\netcoreapp3.1\BaristaBuddyApi.dll
 C:\Users\mcb4r\OneDrive\Desktop\github\code-401\BaristaBuddy\BaristaBuddyAPI\BaristaBuddyApi\obj\Debug\netcoreapp3.1\BaristaBuddyApi.pdb
 C:\Users\mcb4r\OneDrive\Desktop\github\code-401\BaristaBuddy\BaristaBuddyAPI\BaristaBuddyApi\obj\Debug\netcoreapp3.1\BaristaBuddyApi.genruntimeconfig.cache
+C:\Users\mcb4r\OneDrive\Desktop\github\code-401\BaristaBuddy\BaristaBuddyAPI\BaristaBuddyApi\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.json
+C:\Users\mcb4r\OneDrive\Desktop\github\code-401\BaristaBuddy\BaristaBuddyAPI\BaristaBuddyApi\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.BaristaBuddyAPI.json
