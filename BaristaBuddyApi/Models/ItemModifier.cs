@@ -1,4 +1,6 @@
-﻿namespace BaristaBuddyApi.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace BaristaBuddyApi.Models
 {
     public class ItemModifier
     {
@@ -10,6 +12,7 @@
         public int ModifierId { get; set; }
         public StoreModifier Modifier { get; set; }
 
-        public double AdditionalCost { get; set; }
+        [Column(TypeName = "money")]
+        public decimal AdditionalCost { get; set; }
     }
 }
