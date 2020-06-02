@@ -74,11 +74,27 @@ namespace BaristaBuddyApi.Data
                 new StoreModifier { ModifierId = 3, StoreId = 2, Name = "Caramel" }
                 );
 
+            modelBuilder.Entity<ItemModifier>()
+                .HasKey(ItemModifier => new
+                {
+                    ItemModifier.ItemId,
+                    ItemModifier.ModifierId
+
+                });
+            modelBuilder.Entity<ItemModifier>()
+                .HasData(
+                new ItemModifier { ModifierId = 1, ItemId = 1, AdditionalCost = 0.75 },
+                new ItemModifier { ModifierId = 2, ItemId = 4, AdditionalCost = 1.50 },
+                new ItemModifier { ModifierId = 3, ItemId = 3, AdditionalCost = 0.75 }
+                );
+
         }
 
         public DbSet<Store> Store { get; set; }
         public DbSet<Item> Item { get; set; }
 
         public DbSet<StoreModifier> StoreModifier { get; set; }
+
+        public DbSet<ItemModifier> itemModifier { get; set; }
     }
 }
