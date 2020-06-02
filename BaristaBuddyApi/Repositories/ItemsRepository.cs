@@ -20,10 +20,10 @@ namespace BaristaBuddyApi.Repositories
             this._context = _context;
         }
 
-        public async Task<IEnumerable<Item>> GetAllItems()
+        public async Task<IEnumerable<ItemDTO>> GetAllItems()
         {
             var allItems = await _context.Item
-                .Select(item => new Item
+                .Select(item => new ItemDTO
                 {
                     ItemId = item.ItemId,
                     StoreId = item.StoreId,

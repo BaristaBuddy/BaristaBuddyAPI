@@ -24,7 +24,7 @@ namespace BaristaBuddyApi.Controllers
 
         // GET: api/Items
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Item>>> GetAllItems()
+        public async Task<ActionResult<IEnumerable<ItemDTO>>> GetAllItems()
         {
             return Ok(await itemRepository.GetAllItems());
         }
