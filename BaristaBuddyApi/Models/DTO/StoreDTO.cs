@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BaristaBuddyApi.Models;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BaristaBuddyApi.Repositories
 {
@@ -18,5 +20,8 @@ namespace BaristaBuddyApi.Repositories
         public string Phone { get; set; }
         public string WebsiteUrl { get; set; }
         public string StoreImageUrl { get; set; }
+
+        public List<Item> Items { get; set;}
+        public List<StoreModifier> Modifiers { get; set; }
     }
 }

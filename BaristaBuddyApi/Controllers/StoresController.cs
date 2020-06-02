@@ -33,16 +33,11 @@ namespace BaristaBuddyApi.Controllers
 
         // GET: api/Stores/5
         [HttpGet("{id}")]
-        public /*async*/ Task<ActionResult<Store>> GetStore(int id)
+        public async Task<ActionResult<Store>> GetStore(int id)
         {
-            //var store = await storeRepository.GetOneHotel(id);
 
-            //if (store == null)
-            //{
-            //    return NotFound();
-            //}
-
-            return default;
+            return Ok(await storeRepository.GetOneSTore(id));
+           
         }
 
         // PUT: api/Stores/5
