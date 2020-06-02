@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BaristaBuddyApi.Models
 {
@@ -19,5 +20,7 @@ namespace BaristaBuddyApi.Models
 
         public double Price { get; set; }
 
+        // Inverse navigation property
+        public List<ItemModifier> ItemModifiers { get; set; }
     }
 }
