@@ -23,10 +23,10 @@ namespace BaristaBuddyApi.Controllers
         }
 
         // GET: api/Items
-        [HttpGet(""]
-        public async Task<ActionResult<IEnumerable<ItemDTO>>> GetAllItems()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ItemDTO>>> GetAllItems(int storeId)
         {
-            return Ok(await itemRepository.GetAllItems());
+            return Ok(await itemRepository.GetAllItems(storeId));
         }
 
         // GET: api/Items/5
