@@ -11,7 +11,7 @@ using BaristaBuddyApi.Repositories;
 
 namespace BaristaBuddyApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Stores/{storeId}/Items")]
     [ApiController]
     public class ItemsController : ControllerBase
     {
@@ -23,7 +23,7 @@ namespace BaristaBuddyApi.Controllers
         }
 
         // GET: api/Items
-        [HttpGet]
+        [HttpGet(""]
         public async Task<ActionResult<IEnumerable<ItemDTO>>> GetAllItems()
         {
             return Ok(await itemRepository.GetAllItems());
