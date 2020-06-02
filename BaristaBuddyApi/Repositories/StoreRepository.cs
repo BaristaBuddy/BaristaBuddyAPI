@@ -18,7 +18,7 @@ namespace BaristaBuddyApi.Repositories
         public async Task<IEnumerable<StoreDTO>> GetAllStores()
         {
             var store = await _context.Store
-                .Select(store => new Store
+                .Select(store => new StoreDTO
                 {
                     Id = store.Id,
                     Name = store.Name,
