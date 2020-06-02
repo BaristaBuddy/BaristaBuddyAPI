@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BaristaBuddyApi.Data;
 using BaristaBuddyApi.Models;
 using BaristaBuddyApi.Repositories;
-using BaristaBuddyApi.Models.DTO;
+
 
 namespace BaristaBuddyApi.Controllers
 {
@@ -33,7 +33,7 @@ namespace BaristaBuddyApi.Controllers
 
         // GET: api/Stores/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Store>> GetStore(int id)
+        public /*async*/ Task<ActionResult<Store>> GetStore(int id)
         {
             //var store = await storeRepository.GetOneHotel(id);
 
@@ -49,7 +49,7 @@ namespace BaristaBuddyApi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutStore(int id, Store store)
+        public /*async*/ Task<IActionResult> PutStore(int id, Store store)
         {
             //if (id != store.Id)
             //{
@@ -74,14 +74,15 @@ namespace BaristaBuddyApi.Controllers
             //    }
             //}
 
-            return NoContent();
+            //return NoContent();
+            return default;
         }
 
         // POST: api/Stores
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Store>> PostStore(Store store)
+        public /*async*/ Task<ActionResult<Store>> PostStore(Store store)
         {
             return default;
             //_context.Store.Add(store);
@@ -92,7 +93,7 @@ namespace BaristaBuddyApi.Controllers
 
         // DELETE: api/Stores/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Store>> DeleteStore(int id)
+        public /*async*/ Task<ActionResult<Store>> DeleteStore(int id)
         {
             //var store = await _context.Store.FindAsync(id);
             //if (store == null)

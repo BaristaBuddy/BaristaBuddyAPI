@@ -6,6 +6,6 @@ namespace BaristaBuddyApi.Repositories
 {
     public interface IStoreRepository
     {
-        Task<IEnumerable<Store>> GetAllStores();
+        Task<IEnumerable<StoreDTO>> GetAllStores();
     }
 }
