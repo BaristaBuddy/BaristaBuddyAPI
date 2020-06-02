@@ -30,5 +30,7 @@ namespace BaristaBuddyApi.Models.DTO
         public string WebSiteUrl { get; set; }
 
         public string StoreImageUrl { get; set; }
+
+        //public List <StoreItemDTO> items { get; set; }
     }
 }

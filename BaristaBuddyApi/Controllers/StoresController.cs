@@ -14,12 +14,7 @@ namespace BaristaBuddyApi.Controllers
     [ApiController]
     public class StoresController : ControllerBase
     {
-        private readonly BaristaBuddyDbContext _context;
-
-        public StoresController(BaristaBuddyDbContext context)
-        {
-            _context = context;
-        }
+        
 
         // GET: api/Stores
         [HttpGet]
@@ -27,7 +22,7 @@ namespace BaristaBuddyApi.Controllers
         {
             
 
-            return
+            
 
         }
 

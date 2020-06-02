@@ -5,7 +5,14 @@ using System.Threading.Tasks;
 
 namespace BaristaBuddyApi.Data
 {
-    public class storeDatabaseRepository
+    public class storeDatabaseRepository : IStoreRepository
     {
+        private readonly BaristaBuddyDbContext _context;
+
+        public storeDatabaseRepository(BaristaBuddyDbContext context)
+        {
+            _context = context;
+        }
+
     }
 }
