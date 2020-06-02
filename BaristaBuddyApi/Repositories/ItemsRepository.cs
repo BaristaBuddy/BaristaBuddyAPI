@@ -21,9 +21,21 @@ namespace BaristaBuddyApi.Repositories
             this._context = _context;
         }
 
-        public Task<ItemDTO> DeleteItem(int storeId, int itemId)
+        public async Task<ItemDTO> DeleteItem(int storeId, int itemId)
         {
-            throw new NotImplementedException();
+            var item = await _context.Item.FindAsync(itemId);
+            if (item == null)
+            {
+                return null;
+            }
+
+            var itemToReturn = await GetOneItem(storeId, itemId);
+
+            _context.Remove(item);
+            await _context.SaveChangesAsync();
+
+            return itemToReturn;
+
         }
 
         public async Task<IEnumerable<ItemDTO>> GetAllItems(int storeId)
