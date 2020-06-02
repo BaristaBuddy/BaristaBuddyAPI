@@ -38,9 +38,23 @@ namespace BaristaBuddyApi.Repositories
             return allItems;
         }
 
-        public Task<ItemDTO> GetOneItem(int id)
+        public async Task<ItemDTO> GetOneItem(int id)
         {
-            throw new NotImplementedException();
+            var oneItem = await _context.Item
+                .Where(item => item.ItemId == id)
+                .Select(item => new ItemDTO
+                  {
+                    ItemId = item.ItemId,
+                    StoreId = item.StoreId,
+                    Name = item.Name,
+                    Ingredients = item.Ingredients,
+                    ImageUrl = item.ImageUrl,
+                    Price = item.Price
+                }
+                
+                ).FirstOrDefaultAsync();
+
+            return oneItem;
         }
     }
 }
