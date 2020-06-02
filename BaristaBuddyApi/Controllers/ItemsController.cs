@@ -42,7 +42,7 @@ namespace BaristaBuddyApi.Controllers
 
             return item;
         }
-        /*
+        
         // PUT: api/Items/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
@@ -54,27 +54,16 @@ namespace BaristaBuddyApi.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(item).State = EntityState.Modified;
+            bool didUpdate = await itemRepository.UpdateItem(id, item);
 
-            try
+            if (!didUpdate)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ItemExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound();
             }
 
             return NoContent();
         }
-
+        /*
         // POST: api/Items
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.

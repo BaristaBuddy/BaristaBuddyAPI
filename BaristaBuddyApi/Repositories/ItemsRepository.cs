@@ -56,5 +56,10 @@ namespace BaristaBuddyApi.Repositories
 
             return oneItem;
         }
+
+        public Task<bool> UpdateItem(int id, Item item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
