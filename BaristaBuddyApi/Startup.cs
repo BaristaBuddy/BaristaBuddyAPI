@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BaristaBuddyApi.Data;
+using BaristaBuddyApi.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,10 +32,13 @@ namespace BaristaBuddyApi
             services.AddControllers();
             services.AddMvc();
 
-            services.AddDbContext<BaristaBuddyDbContext>(options => {
+            services.AddDbContext<BaristaBuddyDbContext>(options =>
+            {
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");
                 options.UseSqlServer(connectionString);
             });
+
+            services.AddTransient<IStoreRepository, StoreRepository>();
 
         }
 
