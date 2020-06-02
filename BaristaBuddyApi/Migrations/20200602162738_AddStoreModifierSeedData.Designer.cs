@@ -4,14 +4,16 @@ using BaristaBuddyApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BaristaBuddyApi.Migrations
 {
     [DbContext(typeof(BaristaBuddyDbContext))]
-    partial class BaristaBuddyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200602162738_AddStoreModifierSeedData")]
+    partial class AddStoreModifierSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,12 +35,6 @@ namespace BaristaBuddyApi.Migrations
                     b.Property<string>("Ingredients")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ItemModifierItemId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ItemModifierModifierId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -53,8 +49,6 @@ namespace BaristaBuddyApi.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ItemId", "StoreId");
-
-                    b.HasIndex("ItemModifierItemId", "ItemModifierModifierId");
 
                     b.HasIndex("StoreModifierModifierId", "StoreModifierStoreId");
 
@@ -90,42 +84,6 @@ namespace BaristaBuddyApi.Migrations
                             Ingredients = "Enough caffiene to kill a small horse",
                             Name = "James's Triple Death",
                             Price = 6.6600000000000001
-                        });
-                });
-
-            modelBuilder.Entity("BaristaBuddyApi.Models.ItemModifier", b =>
-                {
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ModifierId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("AdditionalCost")
-                        .HasColumnType("float");
-
-                    b.HasKey("ItemId", "ModifierId");
-
-                    b.ToTable("itemModifier");
-
-                    b.HasData(
-                        new
-                        {
-                            ItemId = 1,
-                            ModifierId = 1,
-                            AdditionalCost = 0.75
-                        },
-                        new
-                        {
-                            ItemId = 4,
-                            ModifierId = 2,
-                            AdditionalCost = 1.5
-                        },
-                        new
-                        {
-                            ItemId = 3,
-                            ModifierId = 3,
-                            AdditionalCost = 0.75
                         });
                 });
 
@@ -226,19 +184,11 @@ namespace BaristaBuddyApi.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ItemModifierItemId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ItemModifierModifierId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ModifierId", "StoreId");
-
-                    b.HasIndex("ItemModifierItemId", "ItemModifierModifierId");
 
                     b.ToTable("StoreModifier");
 
@@ -265,10 +215,6 @@ namespace BaristaBuddyApi.Migrations
 
             modelBuilder.Entity("BaristaBuddyApi.Models.Item", b =>
                 {
-                    b.HasOne("BaristaBuddyApi.Models.ItemModifier", null)
-                        .WithMany("Items")
-                        .HasForeignKey("ItemModifierItemId", "ItemModifierModifierId");
-
                     b.HasOne("BaristaBuddyApi.Models.StoreModifier", null)
                         .WithMany("Items")
                         .HasForeignKey("StoreModifierModifierId", "StoreModifierStoreId");
@@ -283,13 +229,6 @@ namespace BaristaBuddyApi.Migrations
                     b.HasOne("BaristaBuddyApi.Models.StoreModifier", null)
                         .WithMany("Stores")
                         .HasForeignKey("StoreModifierModifierId", "StoreModifierStoreId");
-                });
-
-            modelBuilder.Entity("BaristaBuddyApi.Models.StoreModifier", b =>
-                {
-                    b.HasOne("BaristaBuddyApi.Models.ItemModifier", null)
-                        .WithMany("StoreModifiers")
-                        .HasForeignKey("ItemModifierItemId", "ItemModifierModifierId");
                 });
 #pragma warning restore 612, 618
         }
