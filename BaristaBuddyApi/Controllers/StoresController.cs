@@ -44,33 +44,23 @@ namespace BaristaBuddyApi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public /*async*/ Task<IActionResult> PutStore(int id, Store store)
+        public  async Task<IActionResult> PutStore(int id, Store store)
         {
-            //if (id != store.Id)
-            //{
-            //    return BadRequest();
-            //}
+            if (id != store.Id)
+            {
+                return BadRequest();
+            }
 
-            //_context.Entry(store).State = EntityState.Modified;
+            bool didUpdate = await storeRepository.UpdateStore(id, store);
 
-            //try
-            //{
-            //    await _context.SaveChangesAsync();
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //    if (!StoreExists(id))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
+            if (!didUpdate)
+            {
+                return NotFound();
+            }
 
-            //return NoContent();
-            return default;
+
+
+            return NoContent();
         }
 
         // POST: api/Stores

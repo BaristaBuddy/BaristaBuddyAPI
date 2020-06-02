@@ -50,10 +50,10 @@ namespace BaristaBuddyApi.Repositories
                     Phone = store.Phone,
                     WebsiteUrl = store.WebsiteUrl,
                     StoreImageUrl = store.StoreImageUrl,
-                    Items=store.Items
-                    
-                
-                   
+                    Items = store.Items
+
+
+
                 })
                 .ToListAsync();
 
@@ -80,9 +80,9 @@ namespace BaristaBuddyApi.Repositories
             return store;
         }
 
-    
 
-        public async  Task<StoreDTO> SaveNewStore(Store store)
+
+        public async Task<StoreDTO> SaveNewStore(Store store)
         {
             _context.Store.Add(store);
             await _context.SaveChangesAsync();
@@ -90,11 +90,35 @@ namespace BaristaBuddyApi.Repositories
             return await GetOneSTore(store.Id);
         }
 
-      
 
-        public Task<bool> UpdateStore(int id, Store store)
+
+        public async Task<bool> UpdateStore(int id, Store store)
         {
-            throw new System.NotImplementedException();
+            _context.Entry(store).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!StoreExists(id))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+
+            }
+        }
+
+        private bool StoreExists(int id)
+        {
+            return _context.Store.Any(e => e.Id == id);
+
         }
     }
 }
