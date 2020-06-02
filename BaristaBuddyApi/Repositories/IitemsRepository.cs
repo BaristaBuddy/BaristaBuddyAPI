@@ -10,6 +10,6 @@ namespace BaristaBuddyApi.Repositories
         Task<IEnumerable<ItemDTO>> GetAllItems(int storeId);
         Task<ItemDTO> GetOneItem(int storeId, int itemId);
         Task<bool> UpdateItem(int storeId, int itemId, Item item);
-        Task SaveNewItem(Item item);
+        Task SaveNewItem(CreateItem createItem, int storeId);
     }
 }

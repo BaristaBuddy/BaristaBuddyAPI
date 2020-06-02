@@ -60,7 +60,7 @@ namespace BaristaBuddyApi.Repositories
             return oneItem;
         }
 
-        public Task SaveNewItem(Item item)
+        public Task SaveNewItem(CreateItem createItem, int storeId)
         {
             throw new NotImplementedException();
         }
