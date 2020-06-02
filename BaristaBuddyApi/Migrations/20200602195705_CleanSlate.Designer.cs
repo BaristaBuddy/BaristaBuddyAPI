@@ -3,14 +3,16 @@ using BaristaBuddyApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BaristaBuddyApi.Migrations
 {
     [DbContext(typeof(BaristaBuddyDbContext))]
-    partial class BaristaBuddyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200602195705_CleanSlate")]
+    partial class CleanSlate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -235,7 +237,7 @@ namespace BaristaBuddyApi.Migrations
             modelBuilder.Entity("BaristaBuddyApi.Models.Item", b =>
                 {
                     b.HasOne("BaristaBuddyApi.Models.Store", "Store")
-                        .WithMany("Items")
+                        .WithMany()
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -244,7 +246,7 @@ namespace BaristaBuddyApi.Migrations
             modelBuilder.Entity("BaristaBuddyApi.Models.ItemModifier", b =>
                 {
                     b.HasOne("BaristaBuddyApi.Models.Item", "Item")
-                        .WithMany("ItemModifiers")
+                        .WithMany()
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -259,7 +261,7 @@ namespace BaristaBuddyApi.Migrations
             modelBuilder.Entity("BaristaBuddyApi.Models.StoreModifier", b =>
                 {
                     b.HasOne("BaristaBuddyApi.Models.Store", "Store")
-                        .WithMany("Modifiers")
+                        .WithMany()
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

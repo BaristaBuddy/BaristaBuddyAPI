@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BaristaBuddyApi.Models
+﻿namespace BaristaBuddyApi.Models
 {
     public class ItemModifier
     {
+        // PK, FK to Item
         public int ItemId { get; set; }
+        public Item Item { get; set; }
 
+        // PK, FK to StoreModifier
         public int ModifierId { get; set; }
-
-        public List<StoreModifier> StoreModifiers { get; set; }
-
-        public List<Item> Items { get; set; }
+        public StoreModifier Modifier { get; set; }
 
         public double AdditionalCost { get; set; }
     }

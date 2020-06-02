@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BaristaBuddyApi.Models
 {
@@ -10,9 +7,10 @@ namespace BaristaBuddyApi.Models
     {
         public int ItemId { get; set; }
 
+        // FK to parent Store
         public int StoreId { get; set; }
+        public Store Store { get; set; }
 
-        public List<Store> Stores { get; set; }
         [Required]
         public string Name { get; set; }
 
@@ -22,5 +20,7 @@ namespace BaristaBuddyApi.Models
 
         public double Price { get; set; }
 
+        // Inverse navigation property
+        public List<ItemModifier> ItemModifiers { get; set; }
     }
 }
