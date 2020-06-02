@@ -63,19 +63,18 @@ namespace BaristaBuddyApi.Controllers
 
             return NoContent();
         }
-        /*
+        
         // POST: api/Items
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Item>> PostItem(Item item)
+        public async Task<ActionResult<ItemDTO>> PostItem(Item item)
         {
-            _context.Item.Add(item);
-            await _context.SaveChangesAsync();
+            await itemRepository.SaveNewItem(item);
 
             return CreatedAtAction("GetItem", new { id = item.ItemId }, item);
         }
-
+        /*
         // DELETE: api/Items/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Item>> DeleteItem(int id)
@@ -92,9 +91,6 @@ namespace BaristaBuddyApi.Controllers
             return item;
         }
 
-        private bool ItemExists(int id)
-        {
-            return _context.Item.Any(e => e.ItemId == id);
-        }*/
+      */
     }
 }

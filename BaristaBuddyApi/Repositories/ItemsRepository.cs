@@ -58,6 +58,11 @@ namespace BaristaBuddyApi.Repositories
             return oneItem;
         }
 
+        public Task SaveNewItem(Item item)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> UpdateItem(int id, Item item)
         {
             _context.Entry(item).State = EntityState.Modified;
