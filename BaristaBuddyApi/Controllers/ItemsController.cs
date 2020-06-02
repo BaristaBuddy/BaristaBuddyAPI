@@ -30,10 +30,10 @@ namespace BaristaBuddyApi.Controllers
         }
 
         // GET: api/Items/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ItemDTO>> GetItem(int id)
+        [HttpGet("{itemId}")]
+        public async Task<ActionResult<ItemDTO>> GetItem(int storeId, int itemId)
         {
-            var item = await itemRepository.GetOneItem(id);
+            var item = await itemRepository.GetOneItem(storeId, itemId);
 
             if (item == null)
             {

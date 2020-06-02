@@ -24,7 +24,7 @@ namespace BaristaBuddyApi.Repositories
         public async Task<IEnumerable<ItemDTO>> GetAllItems(int storeId)
         {
             var allItems = await _context.Item
-                .Where(item => item.StoreId == storeId)
+                
                 .Select(item => new ItemDTO
                 {
                     ItemId = item.ItemId,
@@ -40,10 +40,11 @@ namespace BaristaBuddyApi.Repositories
             return allItems;
         }
 
-        public async Task<ItemDTO> GetOneItem(int id)
+        public async Task<ItemDTO> GetOneItem(int storeId, int itemId)
         {
             var oneItem = await _context.Item
-                .Where(item => item.ItemId == id)
+                .Where(item => item.StoreId == storeId)
+                .Where(item => item.ItemId == itemId)
                 .Select(item => new ItemDTO
                   {
                     ItemId = item.ItemId,
