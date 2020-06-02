@@ -8,7 +8,7 @@
 
         // PK, FK to StoreModifier
         public int ModifierId { get; set; }
-        public StoreModifier StoreModifier { get; set; }
+        public StoreModifier Modifier { get; set; }
 
         public double AdditionalCost { get; set; }
     }
