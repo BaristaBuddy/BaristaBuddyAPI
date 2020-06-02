@@ -60,9 +60,25 @@ namespace BaristaBuddyApi.Data
                 new Item { ItemId = 4, StoreId = 3, Name = "James's Triple Death", Ingredients = "Enough caffiene to kill a small horse", Price = 6.66 }
                 );
 
+            modelBuilder.Entity<StoreModifier>()
+            .HasKey(StoreModifier => new
+            {
+                StoreModifier.ModifierId,
+                StoreModifier.StoreId
+            });
+
+            modelBuilder.Entity<StoreModifier>()
+                .HasData(
+                new StoreModifier { ModifierId = 1, StoreId = 1, Name = "Mint" },
+                new StoreModifier { ModifierId = 2, StoreId = 1, Name = "Espresso Shot" },
+                new StoreModifier { ModifierId = 3, StoreId = 2, Name = "Caramel" }
+                );
+
         }
 
         public DbSet<Store> Store { get; set; }
         public DbSet<Item> Item { get; set; }
+
+        public DbSet<StoreModifier> StoreModifier { get; set; }
     }
 }
