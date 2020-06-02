@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BaristaBuddyApi.Data;
 using BaristaBuddyApi.Models;
 using BaristaBuddyApi.Repositories;
+using BaristaBuddyApi.Models.DTO;
 
 namespace BaristaBuddyApi.Controllers
 {
@@ -24,7 +25,7 @@ namespace BaristaBuddyApi.Controllers
 
         // GET: api/Stores
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Store>>> GetStores()
+        public async Task<ActionResult<IEnumerable<StoreDTO>>> GetStores()
         {
             return Ok(await storeRepository.GetAllStores());
 
