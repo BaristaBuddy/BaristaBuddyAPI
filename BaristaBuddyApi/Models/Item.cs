@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BaristaBuddyApi.Models
 {
@@ -10,9 +6,10 @@ namespace BaristaBuddyApi.Models
     {
         public int ItemId { get; set; }
 
+        // FK to parent Store
         public int StoreId { get; set; }
+        public Store Store { get; set; }
 
-        public List<Store> Stores { get; set; }
         [Required]
         public string Name { get; set; }
 

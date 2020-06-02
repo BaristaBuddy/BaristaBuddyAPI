@@ -47,11 +47,8 @@ namespace BaristaBuddyApi.Data
                     Zip = "52240"
                 });
             modelBuilder.Entity<Item>()
-                .HasKey(Item => new
-                {
-                    Item.ItemId,
-                    Item.StoreId
-                });
+                .HasKey(Item => Item.ItemId);
+
             modelBuilder.Entity<Item>()
                 .HasData(
                 new Item { ItemId = 1, StoreId = 1, Name = "Brennan's Hot Chocolate", Ingredients = "Almond Milk, Cocoa nibs, Honey, Cinnamon", Price = 3.13 },
@@ -61,11 +58,7 @@ namespace BaristaBuddyApi.Data
                 );
 
             modelBuilder.Entity<StoreModifier>()
-            .HasKey(StoreModifier => new
-            {
-                StoreModifier.ModifierId,
-                StoreModifier.StoreId
-            });
+                .HasKey(StoreModifier => StoreModifier.ModifierId);
 
             modelBuilder.Entity<StoreModifier>()
                 .HasData(
@@ -79,8 +72,8 @@ namespace BaristaBuddyApi.Data
                 {
                     ItemModifier.ItemId,
                     ItemModifier.ModifierId
-
                 });
+
             modelBuilder.Entity<ItemModifier>()
                 .HasData(
                 new ItemModifier { ModifierId = 1, ItemId = 1, AdditionalCost = 0.75 },
