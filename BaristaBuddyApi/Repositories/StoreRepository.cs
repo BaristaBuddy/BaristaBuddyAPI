@@ -1,7 +1,6 @@
 ﻿using BaristaBuddyApi.Data;
 using BaristaBuddyApi.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +15,7 @@ namespace BaristaBuddyApi.Repositories
         {
             _context = context;
         }
-        public async Task<IEnumerable<Store>> GetAllStores()
+        public async Task<IEnumerable<StoreDTO>> GetAllStores()
         {
             var store = await _context.Store
                 .Select(store => new Store
@@ -35,5 +34,7 @@ namespace BaristaBuddyApi.Repositories
 
             return store;
         }
+
+        
     }
 }
