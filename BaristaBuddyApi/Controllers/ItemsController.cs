@@ -88,6 +88,13 @@ namespace BaristaBuddyApi.Controllers
             return item;
         }
 
+        //Get all modifiers for a given store and item
+        [HttpGet("{itemId}/Modifiers")]
+        public async Task<ActionResult<IEnumerable<ItemModifierDTO>>> GetItemModifiers(int storeId, int itemId)
+        {
+            return Ok(await itemRepository.GetAllItemModifiers(storeId, itemId));
+        }
+
       
     }
 }
