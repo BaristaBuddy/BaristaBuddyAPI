@@ -13,43 +13,43 @@ namespace BaristaBuddyApi.Controllers
     [ApiController]
     public class StoreModiferController : ControllerBase
     {
-    
-                IstoreModifierRepository storeModifierRepository;
 
-            public StoreModiferController(IstoreModifierRepository storeModifierRepository)
+        IstoreModifierRepository storeModifierRepository;
+
+        public StoreModiferController(IstoreModifierRepository storeModifierRepository)
+        {
+            this.storeModifierRepository = storeModifierRepository;
+        }
+
+
+
+        //// GET: api/Stores/{storeId}/Modifier
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<StoreModifierDTO>>> GetModifiers(int storeId)
+        {
+            return Ok(await storeModifierRepository.GetAllModifiers(storeId));
+        }
+
+
+
+        //// GET: api/Stores/{storeId}/Modifier/5
+        [HttpGet("{modifierId}")]
+        public async Task<ActionResult<StoreModifierDTO>> GetModifier(int modifierId, int storeId)
+        {
+            var modifier = await storeModifierRepository.GetOneModifier(modifierId, storeId);
+
+            if (modifier == null)
             {
-                this.storeModifierRepository = storeModifierRepository;
+                return NotFound();
             }
 
+            return modifier;
+        }
 
+        //// PUT: api/Stores/{storeId}/Modifier/5
 
-            //// GET: api/Stores/{storeId}/Modifier
-            [HttpGet]
-            public async Task<ActionResult<IEnumerable<StoreModifierDTO>>> GetModifiers(int storeId)
-            {
-                return Ok(await storeModifierRepository.GetAllModifiers(storeId));
-            }
-
-
-
-            //// GET: api/Stores/{storeId}/Modifier/5
-            [HttpGet("{ModifierId}")]
-              public async Task<ActionResult<StoreModifierDTO>> GetModifier(int modifierId , int storeId)
-            {
-                var modifier = await storeModifierRepository.GetOneModifier(modifierId, storeId);
-
-              if (modifier == null)
-              {
-                  return NotFound();
-             }
-
-              return modifier;
-            }
-
-            //// PUT: api/Stores/{storeId}/Modifier/5
-     
-            [HttpPut("{id}")]
-            public async Task<IActionResult> PutItem(int modifierId, int storeId , StoreModifierDTO modifier)
+        [HttpPut("{modifierId}")]
+            public async Task<IActionResult> PutModifier(int modifierId, int storeId , StoreModifier modifier)
             {
                 if (modifierId != modifier.ModifierId)
                {
@@ -76,18 +76,8 @@ namespace BaristaBuddyApi.Controllers
                 return CreatedAtAction("GetModifier", new { storeId = storeId, modifierId = modifier.ModifierId}, modifier);
             }
 
-            // DELETE: api/Stores/{storeId}/Modifier/5
-            [HttpDelete("{ModifierId}")]
-            public async Task<ActionResult<StoreModifierDTO>> DeleteItem(int modifierId , int storeId)
-            {
-                var item = await storeModifierRepository.DeleteModifier( modifierId , storeId);
-
-                if (item == null)
-                {
-                    return NotFound();
-                }
-                return item;
-            }
+            
+           
 
 
         }

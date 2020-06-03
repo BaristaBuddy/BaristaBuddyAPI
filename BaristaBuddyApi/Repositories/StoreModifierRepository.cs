@@ -19,23 +19,7 @@ namespace BaristaBuddyApi.Repositories
             this._context = _context;
         }
 
-        public async Task<StoreModifierDTO> DeleteModifier(int modifierId, int storeId)
-        {
-            var modifier = await _context.StoreModifier.FindAsync(modifierId);
-
-            if (modifier ==null)
-            {
-                return null;
-            }
-
-            var modifierToReturn = await GetOneModifier(modifierId, storeId);
-
-            _context.Remove(modifier);
-            await _context.SaveChangesAsync();
-
-            return modifierToReturn;
-
-        }
+  
 
 
         public async Task<IEnumerable<StoreModifierDTO>> GetAllModifiers(int storeId)
@@ -91,7 +75,7 @@ namespace BaristaBuddyApi.Repositories
            }
 
 
-        public async Task<bool> UpdateModifier(int modifierId, int itemId, StoreModifierDTO modifier)
+        public async Task<bool> UpdateModifier(int modifierId, int itemId, StoreModifier modifier)
         {
             _context.Entry(modifier).State = EntityState.Modified;
 

@@ -46,6 +46,7 @@ namespace BaristaBuddyApi.Data
                     StreetAddress = "121 Dodge St.",
                     Zip = "52240"
                 });
+
             modelBuilder.Entity<Item>()
                 .HasKey(Item => Item.ItemId);
 
