@@ -19,18 +19,18 @@ namespace BaristaBuddyApi.Repositories
             this._context = _context;
         }
 
-        public async Task<StoreModifierDTO> DeleteMofifier(int modifierId, int storeId)
+        public async Task<StoreModifierDTO> DeleteModifier(int modifierId, int storeId)
         {
-            var modofier = await _context.StoreModifier.FindAsync(modifierId);
+            var modifier = await _context.StoreModifier.FindAsync(modifierId);
 
-            if (modifierId == null)
+            if (modifier ==null)
             {
                 return null;
             }
 
             var modifierToReturn = await GetOneModifier(modifierId, storeId);
 
-            _context.Remove(modofier);
+            _context.Remove(modifier);
             await _context.SaveChangesAsync();
 
             return modifierToReturn;
@@ -72,31 +72,26 @@ namespace BaristaBuddyApi.Repositories
 
 
 
-        //public async Task<StoreModifierDTO> SaveNewItem(CreateItem createItemData, int storeId)
-        //    {
-        //        var newItem = new Item
-        //        {
-        //            StoreId = storeId,
-        //            ItemId = createItemData.ItemId,
-        //            Name = createItemData.Name,
-        //            Ingredients = createItemData.Ingredients,
-        //            ImageUrl = createItemData.ImageUrl,
-        //            Price = createItemData.Price
-        //        };
+        public async Task<StoreModifierDTO> SaveNewModifier(StoreModifier modifier, int storeId)
+            {
+                var newModifier = new StoreModifier
+                {
+                    ModifierId= modifier.ModifierId,
+                    Name = modifier.Name,
+                    Description = modifier.Description,
+                    StoreId= modifier.StoreId
+                };
 
-        //        _context.Item.Add(newItem);
-        //        await _context.SaveChangesAsync();
+               _context.StoreModifier.Add(newModifier);
 
-        //        var itemToRetun = await GetOneItem(storeId, createItemData.ItemId);
-        //        return itemToRetun;
-        //    }
+              await _context.SaveChangesAsync();
 
-        //public Task<StoreModifierDTO> SaveNewModifier(StoreModifierDTO modifier)
-        //{
-        //    throw new NotImplementedException();
-        //}
+               var modifierToRetun = await GetOneModifier(storeId, modifier.ModifierId);
+               return modifierToRetun;
+           }
 
-        public async Task<bool> UpdateItem(int modifierId, int itemId, StoreModifierDTO modifier)
+
+        public async Task<bool> UpdateModifier(int modifierId, int itemId, StoreModifierDTO modifier)
         {
             _context.Entry(modifier).State = EntityState.Modified;
 
@@ -126,4 +121,3 @@ namespace BaristaBuddyApi.Repositories
             }
         }
     }
-}

@@ -27,7 +27,7 @@ namespace BaristaBuddyApi.Controllers
             [HttpGet]
             public async Task<ActionResult<IEnumerable<StoreModifierDTO>>> GetModifiers(int storeId)
             {
-                return Ok(await storeModifierRepository.GetAllModifier(storeId));
+                return Ok(await storeModifierRepository.GetAllModifiers(storeId));
             }
 
 
@@ -67,15 +67,14 @@ namespace BaristaBuddyApi.Controllers
             }
 
             //// POST: api/Stores/{storeId}/Items
-            //// To protect from overposting attacks, enable the specific properties you want to bind to, for
-            //// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-            //[HttpPost]
-            //public async Task<ActionResult<ItemDTO>> PostItem(CreateItem createItem, int storeId)
-            //{
-            //    await itemRepository.SaveNewItem(createItem, storeId);
+          
+            [HttpPost]
+            public async Task<ActionResult<ItemDTO>> PostItem(StoreModifier modifier, int storeId)
+            {
+                await storeModifierRepository.SaveNewModifier(modifier, storeId);
 
-            //    return CreatedAtAction("GetItem", new { storeId = storeId, itemId = createItem.ItemId }, createItem);
-            //}
+                return CreatedAtAction("GetItem", new { storeId = storeId, modifierId = modifier.ModifierId}, modifier);
+            }
 
             // DELETE: api/Stores/{storeId}/Items/5
             [HttpDelete("{itemId}")]

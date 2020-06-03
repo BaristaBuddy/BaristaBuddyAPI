@@ -9,10 +9,10 @@ namespace BaristaBuddyApi.Repositories
 {
     public interface IstoreModifierRepository
     {
-        Task<IEnumerable<StoreModifierDTO>> GetAllModifier(int storeId);
+        Task<IEnumerable<StoreModifierDTO>> GetAllModifiers(int storeId);
         Task<StoreModifierDTO> GetOneModifier(int modifierId , int storeId);
         Task<bool> UpdateModifier( int modifierId, int storeId, StoreModifierDTO modifier);
-        Task<StoreModifierDTO> SaveNewModifier(StoreModifierDTO modifier, int storeId);
-        Task<StoreModifierDTO> DeleteModifier(int modifierId , int storeId  ); 
+        Task<StoreModifierDTO> SaveNewModifier(StoreModifier modifier, int storeId);
+        Task<StoreModifierDTO> DeleteModifier(int modifierId , int storeId); 
     }
 }
