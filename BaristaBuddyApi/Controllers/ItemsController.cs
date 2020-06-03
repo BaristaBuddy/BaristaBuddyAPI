@@ -72,10 +72,7 @@ namespace BaristaBuddyApi.Controllers
         {
             await itemRepository.SaveNewItem(createItem, storeId);
 
-            return CreatedAtAction("GetItem", new { storeId = storeId, itemId = createItem.ItemId }, createItem);
-            //var item = await itemRepository.GetOneItem(storeId, createItem.ItemId);
-            //return item;
-                
+            return CreatedAtAction("GetItem", new { storeId = storeId, itemId = createItem.ItemId }, createItem);                
         }
         
         // DELETE: api/Stores/{storeId}/Items/5
