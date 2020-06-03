@@ -23,6 +23,28 @@ namespace BaristaBuddyApi.Repositories
             this._context = _context;
         }
 
+        public async Task<ItemModifierDTO> AddNewItemModifier(int storeId, int itemId, ItemModifier itemModifier)
+        {
+            var newIM = new ItemModifier
+            {
+                ItemId = itemId,
+                ModifierId = itemModifier.ModifierId,
+                AdditionalCost = itemModifier.AdditionalCost
+            };
+
+            _context.itemModifier.Add(newIM);
+            await _context.SaveChangesAsync();
+
+
+            var newIMDTO = new ItemModifierDTO
+            {
+                ModifierName = "new",
+                AdditionalCost = itemModifier.AdditionalCost
+            };
+
+            return newIMDTO;
+        }
+
         public async Task<ItemDTO> DeleteItem(int storeId, int itemId)
         {
             var item = await _context.Item.FindAsync(itemId);

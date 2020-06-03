@@ -95,6 +95,13 @@ namespace BaristaBuddyApi.Controllers
             return Ok(await itemRepository.GetAllItemModifiers(storeId, itemId));
         }
 
+        //Creating new Modifier
+        [HttpPost("{itemId}/Modifiers")]
+        public async Task<ActionResult<ItemModifierDTO>> AddNewItemModifier(int storeId, int itemId, ItemModifier itemModifier)
+        {
+            var result = await itemRepository.AddNewItemModifier(storeId, itemId, itemModifier);
+            return result;
+        }
       
     }
 }
