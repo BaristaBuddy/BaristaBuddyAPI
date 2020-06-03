@@ -72,14 +72,17 @@ namespace BaristaBuddyApi.Controllers
         {
             await itemRepository.SaveNewItem(createItem, storeId);
 
-            return CreatedAtAction("GetItem", new { id = createItem.ItemId }, createItem);
+            return CreatedAtAction("GetItem", new { storeId = storeId, itemId = createItem.ItemId }, createItem);
+            //var item = await itemRepository.GetOneItem(storeId, createItem.ItemId);
+            //return item;
+                
         }
         
         // DELETE: api/Stores/{storeId}/Items/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{itemId}")]
         public async Task<ActionResult<ItemDTO>> DeleteItem(int storeId, int itemId)
         {
-            var item = await itemRepository.DeleteItem(storeId, itemId)
+            var item = await itemRepository.DeleteItem(storeId, itemId);
             if (item == null)
             {
                 return NotFound();

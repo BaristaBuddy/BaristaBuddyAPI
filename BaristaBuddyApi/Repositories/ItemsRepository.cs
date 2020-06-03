@@ -1,5 +1,6 @@
 ﻿using BaristaBuddyApi.Data;
 using BaristaBuddyApi.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic.CompilerServices;
 using System;
@@ -88,6 +89,20 @@ namespace BaristaBuddyApi.Repositories
                 ImageUrl = createItemData.ImageUrl,
                 Price = createItemData.Price
             };
+
+            /* _context.Database.OpenConnection();
+             try
+             {
+                 _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.ITEM ON");
+                 _context.Item.Add(newItem);
+                 await _context.SaveChangesAsync();
+                 _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.ITEM OFF");
+             }
+             finally
+             {
+                 _context.Database.CloseConnection();
+             };*/
+
 
             _context.Item.Add(newItem);
             await _context.SaveChangesAsync();
