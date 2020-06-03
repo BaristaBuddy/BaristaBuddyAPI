@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BaristaBuddyApi.Data;
 using BaristaBuddyApi.Models;
 using BaristaBuddyApi.Repositories;
-
+using BaristaBuddyApi.Models.DTO;
 
 namespace BaristaBuddyApi.Controllers
 {

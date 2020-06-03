@@ -1,5 +1,6 @@
 ﻿using BaristaBuddyApi.Data;
 using BaristaBuddyApi.Models;
+using BaristaBuddyApi.Models.DTO;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic.CompilerServices;
