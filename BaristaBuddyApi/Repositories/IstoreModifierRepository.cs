@@ -8,7 +8,7 @@ namespace BaristaBuddyApi.Repositories
 {
     public interface IstoreModifierRepository
     {
-        Task<IEnumerable<StoreModifierDTO>> GetAllIModifier();
+        Task<IEnumerable<StoreModifierDTO>> GetAllModifier();
         Task<StoreModifierDTO> GetOneModifier(int modifierId);
         Task<bool> UpdateModifier( int modifierId);
         Task<StoreModifierDTO> SaveNewModifier(StoreModifierDTO modifier);

@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace BaristaBuddyApi.Controllers
 {
+    [Route("api/Stores/{storeId}/Modifier")]
+    [ApiController]
     public class StoreModiferController : ControllerBase
     {
-        [Route("api/Stores/{storeId}/Modifier")]
-        [ApiController]
     
                 IstoreModifierRepository storeModifierRepository;
 
@@ -23,11 +23,11 @@ namespace BaristaBuddyApi.Controllers
 
 
             //// GET: api/Stores/{storeId}/Items
-            //[HttpGet]
-            //public async Task<ActionResult<IEnumerable<StoreModifierDTO>>> GetAllItems(int modifierId)
-            //{
-            //    return Ok(await storeModifierRepository.GetAllItems(modifierId));
-            //}
+            [HttpGet]
+            public async Task<ActionResult<IEnumerable<StoreModifierDTO>>> GetAllMofifier()
+            {
+                return Ok(await storeModifierRepository.GetAllModifier());
+            }
 
 
 
