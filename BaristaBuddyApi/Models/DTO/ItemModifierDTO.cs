@@ -14,7 +14,8 @@ namespace BaristaBuddyApi.Models.DTO
 
         // PK, FK to StoreModifier
         //public int ModifierId { get; set; }
-        //public StoreModifier Modifier { get; set; }
+        public string Modifier { get; set; }
+        //public string Name { get; set; }
 
         [Column(TypeName = "money")]
         public decimal AdditionalCost { get; set; }

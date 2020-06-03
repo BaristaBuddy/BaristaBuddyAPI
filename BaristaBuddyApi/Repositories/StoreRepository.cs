@@ -67,6 +67,7 @@ namespace BaristaBuddyApi.Repositories
                             .Select(im => new ItemModifierDTO
                             {
                                 //Item= im.Item,
+                                Modifier = im.Modifier.Name,
                                 AdditionalCost=im.AdditionalCost,
                                 //ModifierId=im.ModifierId,
                                 //ItemId=im.ItemId,
