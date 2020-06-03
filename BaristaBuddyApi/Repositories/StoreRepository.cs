@@ -66,10 +66,10 @@ namespace BaristaBuddyApi.Repositories
 
                             .Select(im => new ItemModifierDTO
                             {
-                                Item= im.Item,
+                                //Item= im.Item,
                                 AdditionalCost=im.AdditionalCost,
-                                ModifierId=im.ModifierId,
-                                ItemId=im.ItemId,
+                                //ModifierId=im.ModifierId,
+                                //ItemId=im.ItemId,
                                 
                             }).ToList()
 
@@ -80,8 +80,8 @@ namespace BaristaBuddyApi.Repositories
 
                     .Select(md => new StoreModifierDTO
                     {
-                        StoreId = md.StoreId,
-                        ModifierId = md.ModifierId,
+                        //StoreId = md.StoreId,
+                        //ModifierId = md.ModifierId,
                         Name = md.Name,
                         Description = md.Description,
                         
@@ -122,10 +122,10 @@ namespace BaristaBuddyApi.Repositories
 
                            .Select(im => new ItemModifierDTO
                            {
-                               Item = im.Item,
+                               //Item = im.Item,
                                AdditionalCost = im.AdditionalCost,
-                               ModifierId = im.ModifierId,
-                               ItemId = im.ItemId,
+                               //ModifierId = im.ModifierId,
+                               //ItemId = im.ItemId,
 
                            }).ToList()
 
@@ -136,8 +136,8 @@ namespace BaristaBuddyApi.Repositories
 
                    .Select(md => new StoreModifierDTO
                    {
-                       StoreId = md.StoreId,
-                       ModifierId = md.ModifierId,
+                       //StoreId = md.StoreId,
+                       //ModifierId = md.ModifierId,
                        Name = md.Name,
                        Description = md.Description,
 
