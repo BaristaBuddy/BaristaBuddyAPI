@@ -1,4 +1,5 @@
-﻿using BaristaBuddyApi.Models.DTO;
+﻿using BaristaBuddyApi.Models;
+using BaristaBuddyApi.Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,10 @@ namespace BaristaBuddyApi.Repositories
 {
     public interface IstoreModifierRepository
     {
-        Task<IEnumerable<StoreModifierDTO>> GetAllModifier();
-        Task<StoreModifierDTO> GetOneModifier(int modifierId);
-        Task<bool> UpdateModifier( int modifierId);
-        Task<StoreModifierDTO> SaveNewModifier(StoreModifierDTO modifier);
-        Task<StoreModifierDTO> DeleteModifier(int modifierId); 
+        Task<IEnumerable<StoreModifierDTO>> GetAllModifier(int storeId);
+        Task<StoreModifierDTO> GetOneModifier(int modifierId , int storeId);
+        Task<bool> UpdateModifier( int modifierId, int storeId);
+        Task<StoreModifierDTO> SaveNewModifier(StoreModifierDTO modifier, int storeId);
+        Task<StoreModifierDTO> DeleteModifier(int modifierId , int storeId); 
     }
 }

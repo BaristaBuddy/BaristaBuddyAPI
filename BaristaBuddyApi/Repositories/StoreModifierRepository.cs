@@ -18,7 +18,7 @@ namespace BaristaBuddyApi.Repositories
                 this._context = _context;
             }
 
-            public async Task<StoreModifierDTO> DeleteMofifier(int modifierId)
+            public async Task<StoreModifierDTO> DeleteMofifier(int modifierId , int storeId)
             {
                 var modofier = await _context.StoreModifier.FindAsync(modifierId);
 
@@ -27,7 +27,7 @@ namespace BaristaBuddyApi.Repositories
                     return null;
                 }
 
-                var modifierToReturn = await GetOneMofier(modifierId);
+                var modifierToReturn = await GetOneModifier(modifierId,storeId);
 
                 _context.Remove(modofier);
                 await _context.SaveChangesAsync();
@@ -37,9 +37,10 @@ namespace BaristaBuddyApi.Repositories
             }
 
     
-        public async Task<IEnumerable<StoreModifierDTO>> GetAllModifiers()
+        public async Task<IEnumerable<StoreModifierDTO>> GetAllModifiers(int storeId)
             {
                 var allModifier = await _context.StoreModifier
+                    .Where(modifier => modifier.StoreId == storeId)
                     .Select(modifer => new StoreModifierDTO
                     {
                         ModifierId= modifer.ModifierId,
@@ -52,25 +53,22 @@ namespace BaristaBuddyApi.Repositories
                 return allModifier;
             }
 
-        //    public async Task<StoreModifierDTO> GetOneItem(int storeId, int itemId)
-        //    {
-        //        var oneItem = await _context.Item
-        //            .Where(item => item.StoreId == storeId)
-        //            .Where(item => item.ItemId == itemId)
-        //            .Select(item => new ItemDTO
-        //            {
-        //                ItemId = item.ItemId,
-        //                StoreId = item.StoreId,
-        //                Name = item.Name,
-        //                Ingredients = item.Ingredients,
-        //                ImageUrl = item.ImageUrl,
-        //                Price = item.Price
-        //            }
+            public async Task<StoreModifierDTO> GetOneModifier(int storeId, int ModifierId)
+           {
+            var oneModifier = await _context.StoreModifier
+                  .Where(modifier => modifier.StoreId == storeId)
+                  .Select(modifer => new StoreModifierDTO
+                  {
+                      ModifierId = modifer.ModifierId,
+                      Name = modifer.Name,
+                      Description = modifer.Description,
+                      StoreId = modifer.StoreId
 
-        //            ).FirstOrDefaultAsync();
 
-        //        return oneItem;
-        //    }
+            ).FirstOrDefaultAsync();
+
+              return oneModifier;
+           }
 
         //public Task<StoreModifierDTO> GetOneModifier(int modifierId)
         //{

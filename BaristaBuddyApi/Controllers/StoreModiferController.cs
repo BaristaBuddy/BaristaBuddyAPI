@@ -24,26 +24,26 @@ namespace BaristaBuddyApi.Controllers
 
             //// GET: api/Stores/{storeId}/Items
             [HttpGet]
-            public async Task<ActionResult<IEnumerable<StoreModifierDTO>>> GetAllMofifier()
+            public async Task<ActionResult<IEnumerable<StoreModifierDTO>>> GetModifiers(int storeId)
             {
-                return Ok(await storeModifierRepository.GetAllModifier());
+                return Ok(await storeModifierRepository.GetAllModifier(storeId));
             }
 
 
 
             //// GET: api/Stores/{storeId}/Items/5
-            //[HttpGet("{itemId}")]
-            //public async Task<ActionResult<ItemDTO>> GetItem(int storeId, int itemId)
-            //{
-            //    var item = await itemRepository.GetOneItem(storeId, itemId);
+            [HttpGet("{ModifierId}")]
+              public async Task<ActionResult<StoreModifierDTO>> GetModifier(int modifierId , int storeId)
+            {
+                var modifier = await storeModifierRepository.GetOneModifier(modifierId, storeId);
 
-            //    if (item == null)
-            //    {
-            //        return NotFound();
-            //    }
+              if (modifier == null)
+              {
+                  return NotFound();
+             }
 
-            //    return item;
-            //}
+              return modifier;
+            }
 
             //// PUT: api/Stores/{storeId}/Items/5
             //// To protect from overposting attacks, enable the specific properties you want to bind to, for
