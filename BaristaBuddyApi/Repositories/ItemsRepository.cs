@@ -34,6 +34,7 @@ namespace BaristaBuddyApi.Repositories
             var itemToReturn = await GetOneItem(storeId, itemId);
 
             _context.Remove(item);
+            
             await _context.SaveChangesAsync();
 
             return itemToReturn;

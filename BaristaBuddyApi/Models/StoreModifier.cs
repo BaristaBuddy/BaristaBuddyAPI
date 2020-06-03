@@ -11,7 +11,7 @@ namespace BaristaBuddyApi.Models
         public Store Store { get; set; }
 
         // List of ItemModifier that refer back to this StoreModifier
-        public List<ItemModifier> Items { get; set; }
+       
 
         [Required]
         public string Name { get; set; }
