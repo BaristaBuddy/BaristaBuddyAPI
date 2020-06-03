@@ -1,5 +1,6 @@
 ﻿using BaristaBuddyApi.Data;
 using BaristaBuddyApi.Models;
+using BaristaBuddyApi.Models.DTO;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -50,12 +51,44 @@ namespace BaristaBuddyApi.Repositories
                     Phone = store.Phone,
                     WebsiteUrl = store.WebsiteUrl,
                     StoreImageUrl = store.StoreImageUrl,
+
                     Items = store.Items
+                        .Select(item => new ItemDTO
+                        {
+                            StoreId=item.StoreId,
+                            ItemId = item.ItemId,
+                            Name = item.Name,
+                            Ingredients = item.Ingredients,
+                            Price = item.Price,
+                            ImageUrl = item.ImageUrl,
+                            ItemModifiers = item.ItemModifiers
+
+                            .Select(im => new ItemModifierDTO
+                            {
+                                Item= im.Item,
+                                AdditionalCost=im.AdditionalCost,
+                                ModifierId=im.ModifierId,
+                                ItemId=im.ItemId,
+                                
+                            }).ToList()
+
+                        }).ToList(),
 
 
+                    Modifiers = store.Modifiers
 
-                })
-                .ToListAsync();
+                    .Select(md => new StoreModifierDTO
+                    {
+                        StoreId = md.StoreId,
+                        ModifierId = md.ModifierId,
+                        Name = md.Name,
+                        Description = md.Description,
+                        
+                   
+                    }).ToList()
+
+                }).ToListAsync();
+
 
             return store;
         }
@@ -63,19 +96,54 @@ namespace BaristaBuddyApi.Repositories
         public async Task<StoreDTO> GetOneSTore(int id)
         {
             var store = await _context.Store
-                .Select(store => new StoreDTO
-                {
-                    Id = store.Id,
-                    Name = store.Name,
-                    StreetAddress = store.StreetAddress,
-                    City = store.City,
-                    State = store.State,
-                    Zip = store.Zip,
-                    Phone = store.Phone,
-                    WebsiteUrl = store.WebsiteUrl,
-                    StoreImageUrl = store.StoreImageUrl,
-                    Items = store.Items
-                }).FirstOrDefaultAsync(store => store.Id == id);
+               .Select(store => new StoreDTO
+               {
+                   Id = store.Id,
+                   Name = store.Name,
+                   StreetAddress = store.StreetAddress,
+                   City = store.City,
+                   State = store.State,
+                   Zip = store.Zip,
+                   Phone = store.Phone,
+                   WebsiteUrl = store.WebsiteUrl,
+                   StoreImageUrl = store.StoreImageUrl,
+
+                   Items = store.Items
+                       .Select(item => new ItemDTO
+                       {
+                           StoreId = item.StoreId,
+                           ItemId = item.ItemId,
+                           Name = item.Name,
+                           Ingredients = item.Ingredients,
+                           Price = item.Price,
+                           ImageUrl = item.ImageUrl,
+                           ItemModifiers = item.ItemModifiers
+
+                           .Select(im => new ItemModifierDTO
+                           {
+                               Item = im.Item,
+                               AdditionalCost = im.AdditionalCost,
+                               ModifierId = im.ModifierId,
+                               ItemId = im.ItemId,
+
+                           }).ToList()
+
+                       }).ToList(),
+
+
+                   Modifiers = store.Modifiers
+
+                   .Select(md => new StoreModifierDTO
+                   {
+                       StoreId = md.StoreId,
+                       ModifierId = md.ModifierId,
+                       Name = md.Name,
+                       Description = md.Description,
+
+
+                   }).ToList()
+
+               }).FirstOrDefaultAsync(store => store.Id == id);
 
             return store;
         }

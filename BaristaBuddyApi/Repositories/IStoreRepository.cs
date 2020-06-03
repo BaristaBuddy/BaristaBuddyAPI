@@ -1,4 +1,5 @@
 ﻿using BaristaBuddyApi.Models;
+using BaristaBuddyApi.Models.DTO;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

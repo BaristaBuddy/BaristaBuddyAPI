@@ -1,8 +1,9 @@
 ﻿using BaristaBuddyApi.Models;
+using BaristaBuddyApi.Models.DTO;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace BaristaBuddyApi.Repositories
+namespace BaristaBuddyApi.Models.DTO
 {
     public class StoreDTO
     {
@@ -21,7 +22,7 @@ namespace BaristaBuddyApi.Repositories
         public string WebsiteUrl { get; set; }
         public string StoreImageUrl { get; set; }
 
-        public List<Item> Items { get; set;}
-        public List<StoreModifier> Modifiers { get; set; }
+        public List<ItemDTO> Items { get; set;}
+        public List<StoreModifierDTO> Modifiers { get; set; }
     }
 }

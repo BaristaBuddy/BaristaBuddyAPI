@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BaristaBuddyApi.Repositories
+namespace BaristaBuddyApi.Models.DTO
 {
     public class ItemDTO
     {
@@ -28,6 +28,6 @@ namespace BaristaBuddyApi.Repositories
         public decimal Price { get; set; }
 
         // Inverse navigation property
-        public List<ItemModifier> ItemModifiers { get; set; }
+        public List<ItemModifierDTO> ItemModifiers { get; set; }
     }
 }
