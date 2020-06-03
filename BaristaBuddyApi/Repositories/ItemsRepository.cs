@@ -42,7 +42,7 @@ namespace BaristaBuddyApi.Repositories
         public async Task<IEnumerable<ItemDTO>> GetAllItems(int storeId)
         {
             var allItems = await _context.Item
-                
+                .Where(item => item.StoreId == storeId)
                 .Select(item => new ItemDTO
                 {
                     ItemId = item.ItemId,
