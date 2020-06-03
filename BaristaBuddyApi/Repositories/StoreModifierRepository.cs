@@ -42,12 +42,12 @@ namespace BaristaBuddyApi.Repositories
         {
             var allModifier = await _context.StoreModifier
                 .Where(modifier => modifier.StoreId == storeId)
-                .Select(modifer => new StoreModifierDTO
+                .Select(modifier => new StoreModifierDTO
                 {
-                    ModifierId = modifer.ModifierId,
-                    Name = modifer.Name,
-                    Description = modifer.Description,
-                    StoreId = modifer.StoreId
+                    ModifierId = modifier.ModifierId,
+                    Name = modifier.Name,
+                    Description = modifier.Description,
+                    StoreId = modifier.StoreId
 
                 }).ToListAsync();
 

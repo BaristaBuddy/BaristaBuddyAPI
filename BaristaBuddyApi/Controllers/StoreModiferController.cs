@@ -16,14 +16,14 @@ namespace BaristaBuddyApi.Controllers
     
                 IstoreModifierRepository storeModifierRepository;
 
-            public StoreModiferController( StoreModifierRepository storeModifierRepository)
+            public StoreModiferController(IstoreModifierRepository storeModifierRepository)
             {
                 this.storeModifierRepository = storeModifierRepository;
             }
 
 
 
-            //// GET: api/Stores/{storeId}/Items
+            //// GET: api/Stores/{storeId}/Modifier
             [HttpGet]
             public async Task<ActionResult<IEnumerable<StoreModifierDTO>>> GetModifiers(int storeId)
             {
@@ -32,7 +32,7 @@ namespace BaristaBuddyApi.Controllers
 
 
 
-            //// GET: api/Stores/{storeId}/Items/5
+            //// GET: api/Stores/{storeId}/Modifier/5
             [HttpGet("{ModifierId}")]
               public async Task<ActionResult<StoreModifierDTO>> GetModifier(int modifierId , int storeId)
             {
@@ -46,7 +46,7 @@ namespace BaristaBuddyApi.Controllers
               return modifier;
             }
 
-            //// PUT: api/Stores/{storeId}/Items/5
+            //// PUT: api/Stores/{storeId}/Modifier/5
      
             [HttpPut("{id}")]
             public async Task<IActionResult> PutItem(int modifierId, int storeId , StoreModifierDTO modifier)
@@ -66,18 +66,18 @@ namespace BaristaBuddyApi.Controllers
               return NoContent();
             }
 
-            //// POST: api/Stores/{storeId}/Items
+            //// POST: api/Stores/{storeId}/Modifier
           
             [HttpPost]
-            public async Task<ActionResult<ItemDTO>> PostItem(StoreModifier modifier, int storeId)
+            public async Task<ActionResult<StoreModifierDTO>> PostItem(StoreModifier modifier, int storeId)
             {
                 await storeModifierRepository.SaveNewModifier(modifier, storeId);
 
-                return CreatedAtAction("GetItem", new { storeId = storeId, modifierId = modifier.ModifierId}, modifier);
+                return CreatedAtAction("GetModifier", new { storeId = storeId, modifierId = modifier.ModifierId}, modifier);
             }
 
-            // DELETE: api/Stores/{storeId}/Items/5
-            [HttpDelete("{itemId}")]
+            // DELETE: api/Stores/{storeId}/Modifier/5
+            [HttpDelete("{ModifierId}")]
             public async Task<ActionResult<StoreModifierDTO>> DeleteItem(int modifierId , int storeId)
             {
                 var item = await storeModifierRepository.DeleteModifier( modifierId , storeId);
