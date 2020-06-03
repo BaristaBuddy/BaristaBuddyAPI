@@ -8,9 +8,7 @@ namespace BaristaBuddyApi.Models.DTO
 {
     public class ItemModifierDTO
     {
-        // PK, FK to Item
-        public int ItemId { get; set; }
-        public Item Item { get; set; }
+      
 
         // PK, FK to StoreModifier
         public int ModifierId { get; set; }

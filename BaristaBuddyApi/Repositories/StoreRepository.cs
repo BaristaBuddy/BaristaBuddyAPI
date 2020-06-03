@@ -30,6 +30,7 @@ namespace BaristaBuddyApi.Repositories
             var storeToReturn = await GetOneSTore(id);
 
             _context.Store.Remove(store);
+            
 
             await _context.SaveChangesAsync();
 
