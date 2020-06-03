@@ -40,6 +40,8 @@ namespace BaristaBuddyApi
 
             services.AddTransient<IStoreRepository, StoreRepository>();
 
+            services.AddTransient<IitemsRepository, ItemsRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
