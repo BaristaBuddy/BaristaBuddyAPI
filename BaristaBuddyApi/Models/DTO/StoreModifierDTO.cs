@@ -8,10 +8,10 @@ namespace BaristaBuddyApi.Models.DTO
 {
     public class StoreModifierDTO
     {
-        public int ModifierId { get; set; }
+        //public int ModifierId { get; set; }
 
-        public int StoreId { get; set; }
-        public Store Store { get; set; }
+        //public int StoreId { get; set; }
+        //public Store Store { get; set; }
 
         [Required]
         public string Name { get; set; }
