@@ -11,8 +11,8 @@ namespace BaristaBuddyApi.Repositories
     {
         Task<IEnumerable<StoreModifierDTO>> GetAllModifier(int storeId);
         Task<StoreModifierDTO> GetOneModifier(int modifierId , int storeId);
-        Task<bool> UpdateModifier( int modifierId, int storeId);
+        Task<bool> UpdateModifier( int modifierId, int storeId, StoreModifierDTO modifier);
         Task<StoreModifierDTO> SaveNewModifier(StoreModifierDTO modifier, int storeId);
-        Task<StoreModifierDTO> DeleteModifier(int modifierId , int storeId); 
+        Task<StoreModifierDTO> DeleteModifier(int modifierId , int storeId  ); 
     }
 }

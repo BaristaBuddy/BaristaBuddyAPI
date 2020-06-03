@@ -1,4 +1,5 @@
 ﻿using BaristaBuddyApi.Data;
+using BaristaBuddyApi.Models;
 using BaristaBuddyApi.Models.DTO;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,50 +12,50 @@ namespace BaristaBuddyApi.Repositories
     public class StoreModifierRepository : IstoreModifierRepository
     {
 
-            private BaristaBuddyDbContext _context;
+        private BaristaBuddyDbContext _context;
 
-            public StoreModifierRepository(BaristaBuddyDbContext _context)
+        public StoreModifierRepository(BaristaBuddyDbContext _context)
+        {
+            this._context = _context;
+        }
+
+        public async Task<StoreModifierDTO> DeleteMofifier(int modifierId, int storeId)
+        {
+            var modofier = await _context.StoreModifier.FindAsync(modifierId);
+
+            if (modifierId == null)
             {
-                this._context = _context;
+                return null;
             }
 
-            public async Task<StoreModifierDTO> DeleteMofifier(int modifierId , int storeId)
-            {
-                var modofier = await _context.StoreModifier.FindAsync(modifierId);
+            var modifierToReturn = await GetOneModifier(modifierId, storeId);
 
-                if (modifierId == null)
-                {
-                    return null;
-                }
+            _context.Remove(modofier);
+            await _context.SaveChangesAsync();
 
-                var modifierToReturn = await GetOneModifier(modifierId,storeId);
+            return modifierToReturn;
 
-                _context.Remove(modofier);
-                await _context.SaveChangesAsync();
+        }
 
-                return modifierToReturn;
 
-            }
-
-    
         public async Task<IEnumerable<StoreModifierDTO>> GetAllModifiers(int storeId)
-            {
-                var allModifier = await _context.StoreModifier
-                    .Where(modifier => modifier.StoreId == storeId)
-                    .Select(modifer => new StoreModifierDTO
-                    {
-                        ModifierId= modifer.ModifierId,
-                        Name=modifer.Name,
-                        Description =modifer.Description,
-                        StoreId = modifer.StoreId
-                 
-                    }).ToListAsync();
+        {
+            var allModifier = await _context.StoreModifier
+                .Where(modifier => modifier.StoreId == storeId)
+                .Select(modifer => new StoreModifierDTO
+                {
+                    ModifierId = modifer.ModifierId,
+                    Name = modifer.Name,
+                    Description = modifer.Description,
+                    StoreId = modifer.StoreId
 
-                return allModifier;
-            }
+                }).ToListAsync();
 
-            public async Task<StoreModifierDTO> GetOneModifier(int storeId, int ModifierId)
-           {
+            return allModifier;
+        }
+
+        public async Task<StoreModifierDTO> GetOneModifier(int storeId, int ModifierId)
+        {
             var oneModifier = await _context.StoreModifier
                   .Where(modifier => modifier.StoreId == storeId)
                   .Select(modifer => new StoreModifierDTO
@@ -64,16 +65,12 @@ namespace BaristaBuddyApi.Repositories
                       Description = modifer.Description,
                       StoreId = modifer.StoreId
 
+                  }).FirstOrDefaultAsync();
 
-            ).FirstOrDefaultAsync();
+            return oneModifier;
+        }
 
-              return oneModifier;
-           }
 
-        //public Task<StoreModifierDTO> GetOneModifier(int modifierId)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         //public async Task<StoreModifierDTO> SaveNewItem(CreateItem createItemData, int storeId)
         //    {
@@ -99,37 +96,34 @@ namespace BaristaBuddyApi.Repositories
         //    throw new NotImplementedException();
         //}
 
-        //public async Task<bool> UpdateItem(int storeId, int itemId, Item item)
-        //    {
-        //        _context.Entry(item).State = EntityState.Modified;
+        public async Task<bool> UpdateItem(int modifierId, int itemId, StoreModifierDTO modifier)
+        {
+            _context.Entry(modifier).State = EntityState.Modified;
 
-        //        try
-        //        {
-        //            await _context.SaveChangesAsync();
-        //            return true;
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!ItemExists(itemId))
-        //            {
-        //                return false;
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //    }
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ModifierExists(modifierId))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
 
-        //public Task<bool> UpdateModifier(int modifierId)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
-        //private bool ItemExists(int id)
-        //    {
-        //        return _context.Item.Any(e => e.ItemId == id);
-        //    }
-        //}
-    
+
+        private bool ModifierExists(int id)
+            {
+                return _context.Item.Any(e => e.ItemId == id);
+            }
+        }
+    }
 }

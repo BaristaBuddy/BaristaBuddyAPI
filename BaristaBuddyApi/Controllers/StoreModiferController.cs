@@ -1,4 +1,5 @@
-﻿using BaristaBuddyApi.Models.DTO;
+﻿using BaristaBuddyApi.Models;
+using BaristaBuddyApi.Models.DTO;
 using BaristaBuddyApi.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -46,25 +47,24 @@ namespace BaristaBuddyApi.Controllers
             }
 
             //// PUT: api/Stores/{storeId}/Items/5
-            //// To protect from overposting attacks, enable the specific properties you want to bind to, for
-            //// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-            //[HttpPut("{id}")]
-            //public async Task<IActionResult> PutItem(int storeId, int itemId, Item item)
-            //{
-            //    if (itemId != item.ItemId)
-            //    {
-            //        return BadRequest();
-            //    }
+     
+            [HttpPut("{id}")]
+            public async Task<IActionResult> PutItem(int modifierId, int storeId , StoreModifierDTO modifier)
+            {
+                if (modifierId != modifier.ModifierId)
+               {
+                   return BadRequest();
+              }
 
-            //    bool didUpdate = await itemRepository.UpdateItem(storeId, itemId, item);
+                bool didUpdate = await storeModifierRepository.UpdateModifier( modifierId, storeId, modifier);
 
-            //    if (!didUpdate)
-            //    {
-            //        return NotFound();
-            //    }
+                if (!didUpdate)
+               {
+                   return NotFound();
+               }
 
-            //    return NoContent();
-            //}
+              return NoContent();
+            }
 
             //// POST: api/Stores/{storeId}/Items
             //// To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -79,9 +79,9 @@ namespace BaristaBuddyApi.Controllers
 
             // DELETE: api/Stores/{storeId}/Items/5
             [HttpDelete("{itemId}")]
-            public async Task<ActionResult<StoreModifierDTO>> DeleteItem(int modifierId)
+            public async Task<ActionResult<StoreModifierDTO>> DeleteItem(int modifierId , int storeId)
             {
-                var item = await storeModifierRepository.DeleteModifier( modifierId);
+                var item = await storeModifierRepository.DeleteModifier( modifierId , storeId);
 
                 if (item == null)
                 {
