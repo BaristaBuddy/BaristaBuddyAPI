@@ -41,9 +41,19 @@ namespace BaristaBuddyApi.Repositories
 
         }
 
-        public Task<IEnumerable<ItemModifierDTO>> GetAllItemModifiers(int storeId, int itemId)
+        public async Task<IEnumerable<ItemModifierDTO>> GetAllItemModifiers(int storeId, int itemId)
         {
-            throw new NotImplementedException();
+            var allModifiers = await _context.itemModifier
+                .Where(im => im.ItemId == itemId)
+                .Select(im => new ItemModifierDTO
+                {
+                    ModifierName = im.Modifier.Name,
+                    AdditionalCost = im.AdditionalCost
+                }
+                ).ToListAsync();
+
+            return allModifiers;
+                
         }
 
         public async Task<IEnumerable<ItemDTO>> GetAllItems(int storeId)
