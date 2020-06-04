@@ -90,6 +90,7 @@ namespace BaristaBuddyApi.Repositories
                     Ingredients = item.Ingredients,
                     ImageUrl = item.ImageUrl,
                     Price = item.Price
+                    
                 }
                 
                 ).ToListAsync();
