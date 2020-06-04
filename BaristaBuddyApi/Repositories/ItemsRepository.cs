@@ -45,6 +45,27 @@ namespace BaristaBuddyApi.Repositories
             return newIMDTO;
         }
 
+        public async Task<ItemSizeDTO> AddNewItemSize(int itemId, ItemSize itemSize)
+        {
+            var newSize = new ItemSize
+            {
+               ItemId = itemId,
+               Size = itemSize.Size,
+               AdditionalCost = itemSize.AdditionalCost
+            };
+
+            _context.ItemSize.Add(newSize);
+            await _context.SaveChangesAsync();
+
+            var newSizeDTO = new ItemSizeDTO
+            {
+                Size = itemSize.Size,
+                AdditionalCost = itemSize.AdditionalCost
+            };
+
+            return newSizeDTO;
+        }
+
         public async Task<ItemDTO> DeleteItem(int storeId, int itemId)
         {
             var item = await _context.Item.FindAsync(itemId);
@@ -61,6 +82,22 @@ namespace BaristaBuddyApi.Repositories
 
             return itemToReturn;
 
+        }
+
+        public async Task<ItemSizeDTO> DeleteItemSize(int itemId, string sizeId)
+        {
+            var size = await _context.ItemSize.FindAsync(itemId, sizeId);
+            var sizeToReturn = new ItemSizeDTO
+            {
+                Size = size.Size,
+                AdditionalCost = size.AdditionalCost
+            };
+
+            _context.Remove(size);
+            await _context.SaveChangesAsync();
+
+            return sizeToReturn;
+            
         }
 
         public async Task<IEnumerable<ItemModifierDTO>> GetAllItemModifiers(int storeId, int itemId)
@@ -89,12 +126,30 @@ namespace BaristaBuddyApi.Repositories
                     Name = item.Name,
                     Ingredients = item.Ingredients,
                     ImageUrl = item.ImageUrl,
-                    Price = item.Price
+                    Price = item.Price,
+                    ItemSizes = item.ItemSizes
+                    .Select(size => new ItemSizeDTO
+                    {
+                        Size = size.Size,
+                        AdditionalCost = size.AdditionalCost
+                    }).ToList()
                 }
-                
                 ).ToListAsync();
 
             return allItems;
+        }
+
+        public async Task<IEnumerable<ItemSizeDTO>> GetAllItemSizes(int storeId, int itemId)
+        {
+            var sizes = await _context.ItemSize
+                .Where(size => size.ItemId == itemId)
+                .Select(size => new ItemSizeDTO 
+                {
+                    Size = size.Size,
+                    AdditionalCost = size.AdditionalCost
+                }).ToListAsync();
+
+            return sizes.OrderBy(size => size.AdditionalCost);
         }
 
         public async Task<ItemDTO> GetOneItem(int storeId, int itemId)
@@ -158,9 +213,36 @@ namespace BaristaBuddyApi.Repositories
             }
         }
 
+        public async Task<bool> UpdateItemSize(int itemId, string sizeId, ItemSize itemSize)
+        {
+            _context.Entry(itemSize).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ItemSizeExists(itemId, sizeId))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
         private bool ItemExists(int id)
         {
             return _context.Item.Any(e => e.ItemId == id);
+        }
+
+        private bool ItemSizeExists(int id, string sizeId)
+        {
+            return _context.ItemSize.Any(e => e.ItemId == id && e.Size == sizeId);
         }
     }
 }

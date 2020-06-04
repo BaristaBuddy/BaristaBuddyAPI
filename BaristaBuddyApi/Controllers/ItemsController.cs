@@ -102,6 +102,51 @@ namespace BaristaBuddyApi.Controllers
             var result = await itemRepository.AddNewItemModifier(storeId, itemId, itemModifier);
             return result;
         }
-      
+
+        //Getting all sizes for an item
+        [HttpGet("{itemId}/Sizes")]
+        public async Task<ActionResult<IEnumerable<ItemSizeDTO>>> GetItemSizes(int storeId, int itemId)
+        {
+            return Ok(await itemRepository.GetAllItemSizes(storeId, itemId));
+        }
+
+        //Updating size information
+        [HttpPut("{itemId}/Sizes/{sizeId}")]
+        public async Task<IActionResult> PutItemSize( int itemId, string sizeId,  ItemSize itemSize)
+        {
+            if (sizeId != itemSize.Size)
+            {
+                return BadRequest();
+            }
+
+            bool didUpdate = await itemRepository.UpdateItemSize( itemId, sizeId, itemSize);
+
+            if (!didUpdate)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
+        //Creating New Size
+        [HttpPost("{itemId}/Sizes")]
+        public async Task<ActionResult<ItemSizeDTO>> AddNewItemSize( int itemId, ItemSize itemSize)
+        {
+            var result = await itemRepository.AddNewItemSize( itemId, itemSize);
+            return result;
+        }
+
+        //Deleting Item Size
+        [HttpDelete("{itemId}/Sizes/{sizeId}")]
+        public async Task<ActionResult<ItemSizeDTO>> DeleteItemSize(int itemId, string sizeId)
+        {
+            var item = await itemRepository.DeleteItemSize( itemId, sizeId);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            return item;
+        }
     }
 }
