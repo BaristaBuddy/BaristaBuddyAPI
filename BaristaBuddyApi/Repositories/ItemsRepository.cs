@@ -89,7 +89,8 @@ namespace BaristaBuddyApi.Repositories
                     Name = item.Name,
                     Ingredients = item.Ingredients,
                     ImageUrl = item.ImageUrl,
-                    Price = item.Price
+                    Price = item.Price,
+                    ItemSizes = item.ItemSizes
                     
                 }
                 
