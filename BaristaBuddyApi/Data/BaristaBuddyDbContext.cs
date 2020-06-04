@@ -82,6 +82,29 @@ namespace BaristaBuddyApi.Data
                 new ItemModifier { ModifierId = 3, ItemId = 3, AdditionalCost = 0.75M }
                 );
 
+            modelBuilder.Entity<ItemSize>()
+                .HasKey(ItemSize => new
+                {
+                    ItemSize.ItemId,
+                    ItemSize.Size
+                });
+
+            modelBuilder.Entity<ItemSize>()
+                .HasData(
+                new ItemSize { ItemId = 1, Size = "Dwarf", AdditionalCost = 0M },
+                new ItemSize { ItemId = 1, Size = "Human", AdditionalCost = 0.50M },
+                new ItemSize { ItemId = 1, Size = "Giant", AdditionalCost = 1.00M },
+                 new ItemSize { ItemId = 2, Size = "Dwarf", AdditionalCost = 0M },
+                new ItemSize { ItemId = 2, Size = "Human", AdditionalCost = 0.50M },
+                new ItemSize { ItemId = 2, Size = "Giant", AdditionalCost = 1.00M },
+                 new ItemSize { ItemId = 3, Size = "Dwarf", AdditionalCost = 0M },
+                new ItemSize { ItemId = 3, Size = "Human", AdditionalCost = 0.50M },
+                new ItemSize { ItemId = 3, Size = "Giant", AdditionalCost = 1.00M },
+                 new ItemSize { ItemId = 4, Size = "Dwarf", AdditionalCost = 0M },
+                new ItemSize { ItemId = 4, Size = "Human", AdditionalCost = 0.50M },
+                new ItemSize { ItemId = 4, Size = "Giant", AdditionalCost = 1.00M }
+                );
+
         }
 
         public DbSet<Store> Store { get; set; }
@@ -90,5 +113,6 @@ namespace BaristaBuddyApi.Data
         public DbSet<StoreModifier> StoreModifier { get; set; }
 
         public DbSet<ItemModifier> itemModifier { get; set; }
+        public DbSet<ItemSize> ItemSize { get; set; }
     }
 }
