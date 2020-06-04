@@ -176,14 +176,36 @@ namespace BaristaBuddyApi.Repositories
             }
         }
 
-        public Task<bool> UpdateItemSize(int itemId, string sizeId, ItemSize itemSize)
+        public async Task<bool> UpdateItemSize(int itemId, string sizeId, ItemSize itemSize)
         {
-            throw new NotImplementedException();
+            _context.Entry(itemSize).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ItemSizeExists(itemId, sizeId))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
 
         private bool ItemExists(int id)
         {
             return _context.Item.Any(e => e.ItemId == id);
+        }
+
+        private bool ItemSizeExists(int id, string sizeId)
+        {
+            return _context.ItemSize.Any(e => e.ItemId == id && e.Size == sizeId);
         }
     }
 }
