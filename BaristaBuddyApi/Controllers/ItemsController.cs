@@ -128,5 +128,13 @@ namespace BaristaBuddyApi.Controllers
 
             return NoContent();
         }
+
+        //Creating New Size
+        [HttpPost("{itemId}/Sizes")]
+        public async Task<ActionResult<ItemSizeDTO>> AddNewItemSize( int itemId, ItemSize itemSize)
+        {
+            var result = await itemRepository.AddNewItemSize( itemId, itemSize);
+            return result;
+        }
     }
 }

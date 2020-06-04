@@ -45,6 +45,11 @@ namespace BaristaBuddyApi.Repositories
             return newIMDTO;
         }
 
+        public Task<ItemSizeDTO> AddNewItemSize(int itemId, ItemSize itemSize)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<ItemDTO> DeleteItem(int storeId, int itemId)
         {
             var item = await _context.Item.FindAsync(itemId);
