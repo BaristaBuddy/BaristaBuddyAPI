@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BaristaBuddyApi.Controllers
 {
-    [Route("api/Stores/{storeId}/Modifier")]
+    [Route("api/Stores/{storeId}/Modifiers")]
     [ApiController]
     public class StoreModiferController : ControllerBase
     {
