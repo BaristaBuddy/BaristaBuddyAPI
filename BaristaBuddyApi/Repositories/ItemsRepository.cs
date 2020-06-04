@@ -91,9 +91,12 @@ namespace BaristaBuddyApi.Repositories
                     ImageUrl = item.ImageUrl,
                     Price = item.Price,
                     ItemSizes = item.ItemSizes
-                    
+                    .Select(size => new ItemSizeDTO
+                    {
+                        Size = size.Size,
+                        AdditionalCost = size.AdditionalCost
+                    }).ToList()
                 }
-                
                 ).ToListAsync();
 
             return allItems;

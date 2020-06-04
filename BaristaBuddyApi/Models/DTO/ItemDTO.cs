@@ -30,6 +30,6 @@ namespace BaristaBuddyApi.Models.DTO
         // Inverse navigation property
         public List<ItemModifierDTO> ItemModifiers { get; set; }
 
-        public List<ItemSize> ItemSizes { get; set; }
+        public List<ItemSizeDTO> ItemSizes { get; set; }
     }
 }
