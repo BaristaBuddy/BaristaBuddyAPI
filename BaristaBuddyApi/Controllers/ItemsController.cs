@@ -99,7 +99,7 @@ namespace BaristaBuddyApi.Controllers
         [HttpPost("{itemId}/Modifiers")]
         public async Task<ActionResult<ItemModifierDTO>> AddNewItemModifier(int storeId, int itemId, ItemModifier itemModifier)
         {
-            var result = await itemRepository.AddNewItemModifier(storeId, itemId, itemModifier);
+            var result = await itemRepository.AddNewItemModifier( itemId, itemModifier);
             return result;
         }
 

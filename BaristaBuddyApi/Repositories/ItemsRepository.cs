@@ -23,7 +23,7 @@ namespace BaristaBuddyApi.Repositories
             this._context = _context;
         }
 
-        public async Task<ItemModifierDTO> AddNewItemModifier(int storeId, int itemId, ItemModifier itemModifier)
+        public async Task<ItemModifierDTO> AddNewItemModifier( int itemId, ItemModifier itemModifier)
         {
             var newIM = new ItemModifier
             {
@@ -190,11 +190,44 @@ namespace BaristaBuddyApi.Repositories
                 Price = createItemData.Price
             };
 
+         
             _context.Item.Add(newItem);
             await _context.SaveChangesAsync();
 
-            var itemToRetun = await GetOneItem(storeId, createItemData.ItemId);
+            var itemToRetun = await GetOneItemByName(storeId, createItemData.Name);
+
+            foreach (var itemMod in createItemData.ItemModifiers)
+            {
+                await AddNewItemModifier(itemToRetun.ItemId, itemMod);
+
+            }
             return itemToRetun;
+        }
+
+        private async Task<ItemDTO> GetOneItemByName(int storeId, string name)
+        {
+            var oneItem = await _context.Item
+               .Where(item => item.StoreId == storeId)
+               .Where(item => item.Name == name)
+               .Select(item => new ItemDTO
+               {
+                   ItemId = item.ItemId,
+                   StoreId = item.StoreId,
+                   Name = item.Name,
+                   Ingredients = item.Ingredients,
+                   ImageUrl = item.ImageUrl,
+                   ItemModifiers = item.ItemModifiers
+                  .Select(thisIm => new ItemModifierDTO
+                  {
+                      ModifierName = thisIm.Modifier.Name,
+                      AdditionalCost = thisIm.AdditionalCost
+                  }).ToList(),
+                   Price = item.Price
+               }
+
+               ).FirstOrDefaultAsync();
+
+            return oneItem;
         }
 
         public async Task<bool> UpdateItem(int storeId, int itemId, Item item)

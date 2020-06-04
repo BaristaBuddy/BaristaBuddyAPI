@@ -1,4 +1,5 @@
-﻿using BaristaBuddyApi.Models.DTO;
+﻿using BaristaBuddyApi.Models;
+using BaristaBuddyApi.Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,6 @@ namespace BaristaBuddyApi.Repositories
 
         public decimal Price { get; set; }
 
-        public List<ItemModifierDTO> ItemModifiers { get; set; }
+        public List<ItemModifier> ItemModifiers { get; set; }
     }
 }
