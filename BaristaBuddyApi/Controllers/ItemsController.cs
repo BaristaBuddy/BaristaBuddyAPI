@@ -102,6 +102,13 @@ namespace BaristaBuddyApi.Controllers
             var result = await itemRepository.AddNewItemModifier(storeId, itemId, itemModifier);
             return result;
         }
-      
+
+        //Getting all sizes for an item
+        [HttpPost("{itemId}/Modifiers")]
+        public async Task<ActionResult<IEnumerable<ItemSizeDTO>>> GetItemSizes(int storeId, int itemId)
+        {
+            return Ok(await itemRepository.GetAllItemSizes(storeId, itemId));
+        }
+
     }
 }

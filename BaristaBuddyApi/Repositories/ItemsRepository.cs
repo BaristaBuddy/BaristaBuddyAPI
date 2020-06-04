@@ -102,6 +102,11 @@ namespace BaristaBuddyApi.Repositories
             return allItems;
         }
 
+        public Task<IEnumerable<ItemSizeDTO>> GetAllItemSizes(int storeId, int itemId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<ItemDTO> GetOneItem(int storeId, int itemId)
         {
             var oneItem = await _context.Item
