@@ -84,6 +84,11 @@ namespace BaristaBuddyApi.Repositories
 
         }
 
+        public Task<ItemSizeDTO> DeleteItemSIze(int itemId, string sizeId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<ItemModifierDTO>> GetAllItemModifiers(int storeId, int itemId)
         {
             var allModifiers = await _context.itemModifier
