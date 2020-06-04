@@ -176,6 +176,11 @@ namespace BaristaBuddyApi.Repositories
             }
         }
 
+        public Task<bool> UpdateItemSize(int itemId, string sizeId, ItemSize itemSize)
+        {
+            throw new NotImplementedException();
+        }
+
         private bool ItemExists(int id)
         {
             return _context.Item.Any(e => e.ItemId == id);

@@ -110,5 +110,23 @@ namespace BaristaBuddyApi.Controllers
             return Ok(await itemRepository.GetAllItemSizes(storeId, itemId));
         }
 
+        //Updating size information
+        [HttpPut("{itemId}/Sizes/{sizeId}")]
+        public async Task<IActionResult> PutItemSize( int itemId, string sizeId,  ItemSize itemSize)
+        {
+            if (sizeId != itemSize.Size)
+            {
+                return BadRequest();
+            }
+
+            bool didUpdate = await itemRepository.UpdateItemSize( itemId, sizeId, itemSize);
+
+            if (!didUpdate)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
     }
 }
