@@ -141,7 +141,7 @@ namespace BaristaBuddyApi.Controllers
         [HttpDelete("{itemId}/Sizes/{sizeId}")]
         public async Task<ActionResult<ItemSizeDTO>> DeleteItemSize(int itemId, string sizeId)
         {
-            var item = await itemRepository.DeleteItemSIze( itemId, sizeId);
+            var item = await itemRepository.DeleteItemSize( itemId, sizeId);
             if (item == null)
             {
                 return NotFound();

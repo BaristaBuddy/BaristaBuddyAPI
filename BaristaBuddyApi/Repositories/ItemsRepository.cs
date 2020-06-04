@@ -84,9 +84,20 @@ namespace BaristaBuddyApi.Repositories
 
         }
 
-        public Task<ItemSizeDTO> DeleteItemSIze(int itemId, string sizeId)
+        public async Task<ItemSizeDTO> DeleteItemSize(int itemId, string sizeId)
         {
-            throw new NotImplementedException();
+            var size = await _context.ItemSize.FindAsync(itemId, sizeId);
+            var sizeToReturn = new ItemSizeDTO
+            {
+                Size = size.Size,
+                AdditionalCost = size.AdditionalCost
+            };
+
+            _context.Remove(size);
+            await _context.SaveChangesAsync();
+
+            return sizeToReturn;
+            
         }
 
         public async Task<IEnumerable<ItemModifierDTO>> GetAllItemModifiers(int storeId, int itemId)
