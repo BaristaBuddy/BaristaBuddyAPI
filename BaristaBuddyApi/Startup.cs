@@ -14,6 +14,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
+using System.IO;
 
 namespace BaristaBuddyApi
 {
@@ -46,9 +48,31 @@ namespace BaristaBuddyApi
             services.AddTransient<IstoreModifierRepository, StoreModifierRepository>();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
-            services.AddSwaggerGen(c =>
+            /*services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+            });*/
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Barista Buddy API",
+                    Description = "An API all about Coffee for the Barista Buddy Application",
+                    TermsOfService = new Uri("https://example.com/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Team Ice - DeltaV",
+                        Email = "hartforward@gmail.com",
+                        Url = new Uri("https://github.com/BaristaBuddy"),
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Use under LICX",
+                        Url = new Uri("https://example.com/license"),
+                    }
+                });
             });
 
         }
