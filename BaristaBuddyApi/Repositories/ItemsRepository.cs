@@ -158,15 +158,21 @@ namespace BaristaBuddyApi.Repositories
                 .Where(item => item.StoreId == storeId)
                 .Where(item => item.ItemId == itemId)
                 .Select(item => new ItemDTO
-                  {
+                {
                     ItemId = item.ItemId,
                     StoreId = item.StoreId,
                     Name = item.Name,
                     Ingredients = item.Ingredients,
                     ImageUrl = item.ImageUrl,
+                   ItemModifiers = item.ItemModifiers
+                   .Select(thisIm => new ItemModifierDTO
+                   {
+                       ModifierName = thisIm.Modifier.Name,
+                       AdditionalCost = thisIm.AdditionalCost
+                   }).ToList(),
                     Price = item.Price
                 }
-                
+
                 ).FirstOrDefaultAsync();
 
             return oneItem;
