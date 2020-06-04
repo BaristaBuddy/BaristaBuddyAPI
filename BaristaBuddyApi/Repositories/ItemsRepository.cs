@@ -196,10 +196,14 @@ namespace BaristaBuddyApi.Repositories
 
             var itemToRetun = await GetOneItemByName(storeId, createItemData.Name);
 
-            foreach (var itemMod in createItemData.ItemModifiers)
+            if (createItemData.ItemModifiers != null)
             {
-                await AddNewItemModifier(itemToRetun.ItemId, itemMod);
 
+                foreach (var itemMod in createItemData.ItemModifiers)
+                {
+                    await AddNewItemModifier(itemToRetun.ItemId, itemMod);
+
+                } 
             }
             return itemToRetun;
         }
