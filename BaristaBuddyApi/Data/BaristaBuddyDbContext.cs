@@ -1,5 +1,6 @@
 ﻿using BaristaBuddyApi.Models;
 using BaristaBuddyApi.Models.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,14 +22,14 @@ namespace BaristaBuddyApi.Data
         {
             modelBuilder.Entity<Store>()
                 .HasData(
-                new Store 
+                new Store
                 {
                     Id = 1,
                     City = "Iowa City",
                     State = "Iowa",
                     Name = "Matt's Place",
                     StreetAddress = "1918 H St.",
-                    Zip = "52240" 
+                    Zip = "52240"
                 },
                 new Store
                 {
@@ -106,6 +107,9 @@ namespace BaristaBuddyApi.Data
                 new ItemSize { ItemId = 4, Size = "Human", AdditionalCost = 0.50M },
                 new ItemSize { ItemId = 4, Size = "Giant", AdditionalCost = 1.00M }
                 );
+
+         
+
 
         }
 
