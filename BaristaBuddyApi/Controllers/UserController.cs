@@ -22,18 +22,6 @@ namespace BaristaBuddyApi.Controllers
                 this.userManager = userManager;
             }
 
-            [HttpPost("Login")]
-            public async Task<IActionResult> Login(BaristaBuddyUser login)
-            {
-                var user = await userManager.FindByNameAsync(login.UserName);
-                if (user != null)
-                {
-                    var result = await userManager.CheckPasswordAsync(user, login.Password);
-                    if (result)
-                    {
-                       
-                    }
-
-                }
-            }
+        }
+    }
 }
