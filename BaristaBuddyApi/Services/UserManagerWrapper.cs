@@ -1,9 +1,12 @@
 ﻿using BaristaBuddyApi.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -77,13 +80,13 @@ namespace BaristaBuddyApi.Services
 
         public interface IUserManager
         {
-            Task<BlogUser> FindByNameAsync(string username);
-            Task<bool> CheckPasswordAsync(BlogUser user, string password);
-            Task AccessFailedAsync(BlogUser user);
-            Task<IdentityResult> CreateAsync(BlogUser user, string password);
-            Task<BlogUser> FindByIdAsync(string userId);
-            Task<IdentityResult> UpdateAsync(BlogUser user);
-            string CreateToken(BlogUser user);
+            Task<BaristaBuddyUser> FindByNameAsync(string username);
+            Task<bool> CheckPasswordAsync(BaristaBuddyUser user, string password);
+            Task AccessFailedAsync(BaristaBuddyUser user);
+            Task<IdentityResult> CreateAsync(BaristaBuddyUser user, string password);
+            Task<BaristaBuddyUser> FindByIdAsync(string userId);
+            Task<IdentityResult> UpdateAsync(BaristaBuddyUser user);
+            string CreateToken(BaristaBuddyUser user);
         }
     }
-}
+
