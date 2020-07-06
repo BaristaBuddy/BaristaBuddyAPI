@@ -1,4 +1,6 @@
 ﻿using BaristaBuddyApi.Models;
+using BaristaBuddyApi.Models.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BaristaBuddyApi.Data
 {
-    public class BaristaBuddyDbContext : DbContext 
+    public class BaristaBuddyDbContext : IdentityDbContext<BaristaBuddyUser>
     {
         public BaristaBuddyDbContext (DbContextOptions options) : base(options)
         {
@@ -114,5 +116,6 @@ namespace BaristaBuddyApi.Data
 
         public DbSet<ItemModifier> itemModifier { get; set; }
         public DbSet<ItemSize> ItemSize { get; set; }
+        public DbSet<BaristaBuddyUser> BaristaBuddyUser { get; set; }
     }
 }

@@ -16,6 +16,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.IO;
+using BaristaBuddyApi.Models.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace BaristaBuddyApi
 {
@@ -41,6 +43,9 @@ namespace BaristaBuddyApi
                 options.UseSqlServer(connectionString);
             });
 
+            services.AddIdentity<BaristaBuddyUser, IdentityRole>()
+               .AddEntityFrameworkStores<BaristaBuddyDbContext>()
+               ;
             services.AddTransient<IStoreRepository, StoreRepository>();
 
             services.AddTransient<IitemsRepository, ItemsRepository>();
