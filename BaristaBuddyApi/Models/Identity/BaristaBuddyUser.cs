@@ -10,11 +10,11 @@ namespace BaristaBuddyApi.Models.Identity
     public class BaristaBuddyUser:IdentityUser
     {
         [Required]
-        public string Firstname { get; set; }
+        public string FirstName { get; set; }
         [Required]
         public string LastName { get; set;}
-        public string PhoneNumber { get; set; }
-        public DateTime? BirthDate { get; set; }
+        public string PhoneNumber { get; set;}
+        public DateTime? BirthDate { get; set;}
         public string ImageUrl { get; set; }
         [Required]
         public string Email { get; set; }
