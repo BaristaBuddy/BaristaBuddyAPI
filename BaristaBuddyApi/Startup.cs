@@ -136,6 +136,13 @@ namespace BaristaBuddyApi
                 c.RoutePrefix = string.Empty;
             });
 
+            app.UseCors(policy =>
+            {
+                policy.AllowAnyOrigin();
+                policy.AllowAnyHeader();
+                policy.AllowAnyMethod();
+            });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
