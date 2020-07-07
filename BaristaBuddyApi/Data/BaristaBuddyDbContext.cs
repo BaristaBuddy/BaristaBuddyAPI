@@ -1,4 +1,7 @@
 ﻿using BaristaBuddyApi.Models;
+using BaristaBuddyApi.Models.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BaristaBuddyApi.Data
 {
-    public class BaristaBuddyDbContext : DbContext 
+    public class BaristaBuddyDbContext : IdentityDbContext<BaristaBuddyUser>
     {
         public BaristaBuddyDbContext (DbContextOptions options) : base(options)
         {
@@ -17,16 +20,18 @@ namespace BaristaBuddyApi.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Store>()
                 .HasData(
-                new Store 
+                new Store
                 {
                     Id = 1,
                     City = "Iowa City",
                     State = "Iowa",
                     Name = "Matt's Place",
                     StreetAddress = "1918 H St.",
-                    Zip = "52240" 
+                    Zip = "52240"
                 },
                 new Store
                 {
@@ -105,6 +110,9 @@ namespace BaristaBuddyApi.Data
                 new ItemSize { ItemId = 4, Size = "Giant", AdditionalCost = 1.00M }
                 );
 
+         
+
+
         }
 
         public DbSet<Store> Store { get; set; }
@@ -114,5 +122,6 @@ namespace BaristaBuddyApi.Data
 
         public DbSet<ItemModifier> itemModifier { get; set; }
         public DbSet<ItemSize> ItemSize { get; set; }
+        public DbSet<BaristaBuddyUser> BaristaBuddyUser { get; set; }
     }
 }
