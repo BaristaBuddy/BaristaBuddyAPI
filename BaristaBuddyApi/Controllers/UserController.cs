@@ -24,7 +24,7 @@ namespace BaristaBuddyApi.Controllers
                 this.userManager = userManager;
             }
             [HttpPost("Login")]
-            public async Task<IActionResult> Login(BaristaBuddyUser login)
+            public async Task<IActionResult> Login(LoginData login)
             {
                 var user = await userManager.FindByNameAsync(login.UserName);
                 if (user != null)
@@ -32,7 +32,7 @@ namespace BaristaBuddyApi.Controllers
                     var result = await userManager.CheckPasswordAsync(user, login.Password);
                     if (result)
                     {
-                        return Ok(new BaristaBuddyUser
+                        return Ok(new UserWithToken
                         {
                             UserId = user.Id,
                             Token = userManager.CreateToken(user)
@@ -47,14 +47,14 @@ namespace BaristaBuddyApi.Controllers
 
             [HttpPost("Register")]
 
-            public async Task<IActionResult> Register(BaristaBuddyUser register)
+            public async Task<IActionResult> Register(Register register)
             {
                 var user = new BaristaBuddyUser
                 {
                     Email = register.Email,
                     UserName = register.Email,
-                    BirthDate= register.BirthDate,
                     PhoneNumber=register.PhoneNumber,
+                    BirthDate= register.BirthDate,
                     FirstName = register.FirstName,
                     LastName = register.LastName
 
@@ -63,14 +63,14 @@ namespace BaristaBuddyApi.Controllers
                 var result = await userManager.CreateAsync(user, register.Password);
                 if (!result.Succeeded)
                 {
-                    return BadRequest(new
+                    return BadRequest(new 
                     {
                         message = "registration failed",
                         errors = result.Errors
                     });
                 }
 
-                return Ok(new BaristaBuddyUser
+                return Ok(new UserWithToken
                 {
                     UserId = user.Id,
                     Token = userManager.CreateToken(user)
@@ -96,10 +96,12 @@ namespace BaristaBuddyApi.Controllers
 
                     return Ok(new
                     {
-                        UserId = user.Id,
                         user.Email,
+                        user.BirthDate,
+                        user.ImageUrl,
+                        user.PhoneNumber,
                         user.FirstName,
-                        user.LastName
+                        user.LastName,
 
                     });
                 }
@@ -117,6 +119,9 @@ namespace BaristaBuddyApi.Controllers
                 {
                     UserId = user.Id,
                     user.Email,
+                    user.BirthDate,
+                    user.ImageUrl,
+                    user.PhoneNumber,
                     user.FirstName,
                     user.LastName,
 
@@ -140,6 +145,9 @@ namespace BaristaBuddyApi.Controllers
                 {
                     UserId = user.Id,
                     user.Email,
+                    user.BirthDate,
+                    user.ImageUrl,
+                    user.PhoneNumber,
                     user.FirstName,
                     user.LastName,
 

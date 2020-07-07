@@ -14,7 +14,7 @@ namespace BaristaBuddyApi.Models.Identity
         public string Password { get; set; }
         [Required]
         public string FirstName { get; set; }
-
+        public string PhoneNumber { get; set; }
         [Required]
         public string LastName { get; set; }
 
