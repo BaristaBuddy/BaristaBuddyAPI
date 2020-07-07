@@ -7,5 +7,7 @@ namespace BaristaBuddyApi.Models.Identity
 {
     public class UserWithToken
     {
+        public string UserId { get; set; }
+        public String Token { get; set; }
     }
 }
