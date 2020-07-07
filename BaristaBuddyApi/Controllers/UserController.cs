@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BaristaBuddyApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[Controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -154,6 +154,12 @@ namespace BaristaBuddyApi.Controllers
                 });
             }
 
+            [HttpGet]
+
+            public string GetUser()
+            {
+                return "hello";
+            }
         }
     }
     }

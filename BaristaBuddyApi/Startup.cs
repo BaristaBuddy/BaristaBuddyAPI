@@ -18,6 +18,10 @@ using System.Reflection;
 using System.IO;
 using BaristaBuddyApi.Models.Identity;
 using Microsoft.AspNetCore.Identity;
+using BaristaBuddyApi.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace BaristaBuddyApi
 {
@@ -46,6 +50,35 @@ namespace BaristaBuddyApi
             services.AddIdentity<BaristaBuddyUser, IdentityRole>()
                .AddEntityFrameworkStores<BaristaBuddyDbContext>()
                ;
+            services
+                .AddAuthentication(options =>
+                {
+
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = false;
+                    options.SaveToken = true;
+
+                    var secret = Configuration["JWT:Secret"];
+                    var secretBytes = Encoding.UTF8.GetBytes(secret);
+                    var signingKey = new SymmetricSecurityKey(secretBytes);
+
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = signingKey,
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                    };
+                });
+
+
+            services.AddTransient<IUserManager, UserManagerWrapper>();
+
             services.AddTransient<IStoreRepository, StoreRepository>();
 
             services.AddTransient<IitemsRepository, ItemsRepository>();
