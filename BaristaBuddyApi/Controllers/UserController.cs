@@ -13,8 +13,7 @@ namespace BaristaBuddyApi.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
-    public class UserController : ControllerBase
-    {
+  
         public class UsersController : ControllerBase
         {
             private readonly IUserManager userManager;
@@ -162,5 +161,5 @@ namespace BaristaBuddyApi.Controllers
             }
         }
     }
-    }
+    
 
