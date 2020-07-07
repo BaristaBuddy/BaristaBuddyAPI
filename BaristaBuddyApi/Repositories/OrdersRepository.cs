@@ -48,6 +48,17 @@ namespace BaristaBuddyApi.Repositories
             return order;
         }
 
+        public async Task<Orders> GetAllOrders()
+        {
+            var order = await _context.Order
+                .Select(order => new Orders
+                {
+                    OrderTime= order.OrderTime,
+                    PickupName= order.PickupName,
+                    StoreId= order.StoreId,
+                    User.
 
+                }).ToListAsync();
+        }
     }
 }

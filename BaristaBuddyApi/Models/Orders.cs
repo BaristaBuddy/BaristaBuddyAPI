@@ -16,5 +16,6 @@ namespace BaristaBuddyApi.Models
         public string PickupName { get; set; }
         public BaristaBuddyUser User{ get; set; }
         public Store Store { get; set; }
+        public List <OrderItem> OrderItem { get; set; }
     }
 }
