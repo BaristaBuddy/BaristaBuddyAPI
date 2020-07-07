@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BaristaBuddyApi.Repositories
 {
-    public class IOrdersRepository
+    public interface IOrdersRepository
     {
-        Task<IEnumerable<Orders>> GetAllOrders();
+        Task<IEnumerable<Orders>> GetAllOrders(string userId);
         Task<Orders> GetOneOrder(int id);
         Task<bool> UpdateOrder(int id, Orders order);
         Task<Orders> SaveNew(Orders order);

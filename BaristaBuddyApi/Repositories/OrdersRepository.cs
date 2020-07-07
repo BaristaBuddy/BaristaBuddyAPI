@@ -1,5 +1,7 @@
 ﻿using BaristaBuddyApi.Data;
 using BaristaBuddyApi.Models;
+using BaristaBuddyApi.Models.DTO;
+using BaristaBuddyApi.Models.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -26,24 +28,34 @@ namespace BaristaBuddyApi.Repositories
                {
                    PickupName = order.PickupName,
                    OrderTime = order.OrderTime,
-                   Id=order.Id,
-
+                   OrderItem= order.OrderItem
+                   .Where(o=> o.OrderId == id)
+                   .Select(ot=> new OrderItem { 
+                       ItemId=ot.ItemId,
+                   }).ToList()
                }).FirstOrDefaultAsync();
 
             return order;
         }
 
-        public async Task<Orders> GetAllOrders()
+        public async Task<Orders> GetAllOrders(string userid)
         {
             var order = await _context.Order
+                .Where(o=>o.User.Id==userid)
                 .Select(order => new Orders
                 {
-                    OrderTime= order.OrderTime,
-                    PickupName= order.PickupName,
-                    StoreId= order.StoreId,
-                    User.
+                    PickupName = order.PickupName,
+                    OrderTime = order.OrderTime,
+                    OrderItem = order.OrderItem
+                   .Select(ot => new OrderItem
+                   {
+                       ItemId = ot.ItemId,
+                   }).ToList(),
+               }).FirstOrDefaultAsync();
 
-                }).ToListAsync();
+            return order;
         }
+
+
     }
 }
