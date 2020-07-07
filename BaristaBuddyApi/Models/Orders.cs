@@ -10,12 +10,10 @@ namespace BaristaBuddyApi.Models
     public class Orders
     {
         public int Id { get; set; }
-        public int StoreId { get; set; }
         public DateTime? PickupTime { get; set; }
         public DateTime? OrderTime { get; set; }
         public string PickupName { get; set; }
-        public BaristaBuddyUser User{ get; set; }
-        public Store Store { get; set; }
-        public List <OrderItem> OrderItem { get; set; }
+        public BaristaBuddyUser User{ get; set;}
+        public List <OrderItem> OrderItem { get; set;}
     }
 }

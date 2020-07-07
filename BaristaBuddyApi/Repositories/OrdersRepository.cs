@@ -17,22 +17,7 @@ namespace BaristaBuddyApi.Repositories
             this._context = _context;
         }
 
-        public async Task<Orders> DeleteOrder (int id ,int storId, int userId)
-        {
-            var order = await _context.Order.FindAsync();
-
-                if (order==null)
-            {
-                return null;
-            }
-
-            var storeToReturn = await GetOneOrder(id);
-            _context.Remove(order);
-
-            await _context.SaveChangesAsync();
-            return storeToReturn;
-
-        }
+        
         public async Task<Orders> GetOneOrder(int id)
         {
             var order = await _context.Order
