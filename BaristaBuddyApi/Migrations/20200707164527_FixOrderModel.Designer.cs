@@ -4,14 +4,16 @@ using BaristaBuddyApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BaristaBuddyApi.Migrations
 {
     [DbContext(typeof(BaristaBuddyDbContext))]
-    partial class BaristaBuddyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200707164527_FixOrderModel")]
+    partial class FixOrderModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,14 +107,14 @@ namespace BaristaBuddyApi.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("AdditionalCost")
-                        .HasColumnType("money");
-
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("money");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");

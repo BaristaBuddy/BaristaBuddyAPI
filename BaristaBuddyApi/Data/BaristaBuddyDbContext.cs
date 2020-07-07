@@ -123,5 +123,7 @@ namespace BaristaBuddyApi.Data
         public DbSet<ItemModifier> itemModifier { get; set; }
         public DbSet<ItemSize> ItemSize { get; set; }
         public DbSet<BaristaBuddyUser> BaristaBuddyUser { get; set; }
+        public DbSet<Orders> Order { get; set; }
+        public DbSet<OrderItem> OrderItem { get; set; }
     }
 }

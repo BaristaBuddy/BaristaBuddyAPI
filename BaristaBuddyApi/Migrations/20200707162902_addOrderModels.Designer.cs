@@ -4,14 +4,16 @@ using BaristaBuddyApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BaristaBuddyApi.Migrations
 {
     [DbContext(typeof(BaristaBuddyDbContext))]
-    partial class BaristaBuddyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200707162902_addOrderModels")]
+    partial class addOrderModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,37 +98,6 @@ namespace BaristaBuddyApi.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("BaristaBuddyApi.Models.Identity.OrderItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("AdditionalCost")
-                        .HasColumnType("money");
-
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Size")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ItemId");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("OrderItem");
                 });
 
             modelBuilder.Entity("BaristaBuddyApi.Models.Item", b =>
@@ -317,37 +288,6 @@ namespace BaristaBuddyApi.Migrations
                             Size = "Giant",
                             AdditionalCost = 1.00m
                         });
-                });
-
-            modelBuilder.Entity("BaristaBuddyApi.Models.Orders", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime?>("OrderTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PickupName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("PickupTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("StoreId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StoreId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Order");
                 });
 
             modelBuilder.Entity("BaristaBuddyApi.Models.Store", b =>
@@ -595,21 +535,6 @@ namespace BaristaBuddyApi.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("BaristaBuddyApi.Models.Identity.OrderItem", b =>
-                {
-                    b.HasOne("BaristaBuddyApi.Models.Item", "Item")
-                        .WithMany()
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BaristaBuddyApi.Models.Orders", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("BaristaBuddyApi.Models.Item", b =>
                 {
                     b.HasOne("BaristaBuddyApi.Models.Store", "Store")
@@ -641,19 +566,6 @@ namespace BaristaBuddyApi.Migrations
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("BaristaBuddyApi.Models.Orders", b =>
-                {
-                    b.HasOne("BaristaBuddyApi.Models.Store", "Store")
-                        .WithMany()
-                        .HasForeignKey("StoreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BaristaBuddyApi.Models.Identity.BaristaBuddyUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("BaristaBuddyApi.Models.StoreModifier", b =>
