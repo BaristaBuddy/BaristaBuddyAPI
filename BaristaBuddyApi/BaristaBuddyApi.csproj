@@ -10,6 +10,10 @@
     <Compile Remove="Migrations\20200707163554_addOrdersModels.Designer.cs" />
     <Compile Remove="Migrations\20200708162146_addInverseNavPropToUser.cs" />
     <Compile Remove="Migrations\20200708162146_addInverseNavPropToUser.Designer.cs" />
+    <Compile Remove="Migrations\20200708184458_AddInverseNavToStore.cs" />
+    <Compile Remove="Migrations\20200708184458_AddInverseNavToStore.Designer.cs" />
+    <Compile Remove="Migrations\20200708184627_testing.cs" />
+    <Compile Remove="Migrations\20200708184627_testing.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
