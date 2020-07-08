@@ -83,7 +83,6 @@ namespace BaristaBuddyApi.Controllers
                 return CreatedAtAction(nameof(GetOneOrder), new { id = order.Id }, order);
             }
             return Unauthorized();
-
         }
 
         
