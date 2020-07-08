@@ -1,4 +1,5 @@
 ﻿using BaristaBuddyApi.Models;
+using BaristaBuddyApi.Models.DTO;
 using BaristaBuddyApi.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -25,15 +26,15 @@ namespace BaristaBuddyApi.Controllers
         // GET: api/ordes
         [HttpGet ("{id}")]
 
-        public async Task<ActionResult<Orders>> GetOneOrder(int id)
+        public async Task<ActionResult<OrderDTO>> GetOneOrder(int id)
         {
             return Ok(await orderRepository.GetOneOrder(id));
         }
 
         [HttpPost]
-        public async Task<ActionResult<Orders>> postOrder(Orders order)
+        public async Task<ActionResult<OrderDTO>> postOrder(Orders order)
         {
-
+            return null;
         }
     }
 }

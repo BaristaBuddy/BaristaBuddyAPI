@@ -16,7 +16,6 @@ namespace BaristaBuddyApi.Models.Identity
         public string LastName { get; set; }
         public DateTime? BirthDate { get; set; }
         public string ImageUrl { get; set; }
-        public Orders order { get; set; }
 
 
     }

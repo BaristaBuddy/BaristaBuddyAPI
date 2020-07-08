@@ -20,23 +20,15 @@ namespace BaristaBuddyApi.Repositories
         }
 
         
-        public async Task<Orders> GetOneOrder(int id)
+        public async Task<OrderDTO> GetOneOrder(int id)
         {
             var order = await _context.Order
                 .Where(o=> o.Id==id)
-               .Select(order => new Orders
+               .Select(order => new OrderDTO
                {
-                   PickupName = order.PickupName,
-                   OrderTime = order.OrderTime,
-                   OrderItem= order.OrderItem                   
-                   .Select(ot=> new OrderItem
-                   { 
-                       Item = ot.Item
-                       .Select(it=> new ItemDTO
-                       { 
-                          
-                       }).ToList(),
-                   }).ToList()
+                  
+                               
+             
                }).FirstOrDefaultAsync();
 
             return order;
@@ -73,7 +65,7 @@ namespace BaristaBuddyApi.Repositories
 
         }
 
-        public async Task<Orders> SaveNew(Orders order)
+        public async Task<OrderDTO> SaveNewOrder(Orders order)
         {
             _context.Order.Add(order);
             await _context.SaveChangesAsync();
@@ -81,11 +73,6 @@ namespace BaristaBuddyApi.Repositories
             return await GetOneOrder(order.Id);
         }
 
-        public Task<Orders> DeleteOrder(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        
+     
     }
 }

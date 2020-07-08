@@ -10,6 +10,7 @@ namespace BaristaBuddyApi.Models.DTO
         public int Id { get; set; }
         public DateTime? PickupTime { get; set; }
         public DateTime? OrderTime { get; set; }
+        public string PickupName { get; set; }
         public List<OrderItemDTO> OrderItem { get; set; }
     }
 }

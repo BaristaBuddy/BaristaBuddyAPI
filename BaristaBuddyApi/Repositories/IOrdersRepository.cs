@@ -1,4 +1,6 @@
-﻿using BaristaBuddyApi.Models;
+﻿
+using BaristaBuddyApi.Models.DTO;
+using BaristaBuddyApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +10,8 @@ namespace BaristaBuddyApi.Repositories
 {
     public interface IOrdersRepository
     {
-        Task<Orders> GetOneOrder(int id);
-        Task<bool> UpdateOrder(int id, Orders order);
-        Task<Orders> SaveNew(Orders order);
+        Task<OrderDTO> GetOneOrder(int id);
+      
+        Task<OrderDTO> SaveNewOrder(Orders order);
     }
 }
