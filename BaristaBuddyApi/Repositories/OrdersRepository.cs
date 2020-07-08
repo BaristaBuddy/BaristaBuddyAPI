@@ -103,9 +103,6 @@ namespace BaristaBuddyApi.Repositories
             throw new NotImplementedException();
         }
 
-        Task<IEnumerable<Orders>> IOrdersRepository.GetAllOrders()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
