@@ -16,5 +16,6 @@ namespace BaristaBuddyApi.Models.DTO
         public string Size { get; set; }
         public decimal AdditionalCost { get; set; }
         public int OrderId { get; set; }
+        public int ItemId { get; set; }
     }
 }

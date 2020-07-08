@@ -43,9 +43,11 @@ namespace BaristaBuddyApi.Repositories
 
             _context.OrderItem.Remove(orderItem);
 
+            await _context.SaveChangesAsync();
+
             return OrderItemToReturn;
         }
-
+        
         public async Task<OrderItemDTO> GetOneOrderItem(int id)
         {
             var orderItem = await _context.OrderItem
@@ -53,6 +55,7 @@ namespace BaristaBuddyApi.Repositories
                .Select(oi => new OrderItemDTO
                {
                    Id=oi.Id,
+                  
                   OrderId=oi.OrderId,
                   Price=oi.Item.Price,
                   Name=oi.Item.Name,
