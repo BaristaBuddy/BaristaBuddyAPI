@@ -36,7 +36,7 @@ namespace BaristaBuddyApi.Controllers
         public async Task<ActionResult<Store>> GetStore(int id)
         {
 
-            return Ok(await storeRepository.GetOneSTore(id));
+            return Ok(await storeRepository.GetOneStore(id));
            
         }
 

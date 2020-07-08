@@ -27,7 +27,7 @@ namespace BaristaBuddyApi.Repositories
                 return null;
             }
 
-            var storeToReturn = await GetOneSTore(id);
+            var storeToReturn = await GetOneStore(id);
 
             _context.Store.Remove(store);
             
@@ -95,7 +95,7 @@ namespace BaristaBuddyApi.Repositories
             return store;
         }
 
-        public async Task<StoreDTO> GetOneSTore(int id)
+        public async Task<StoreDTO> GetOneStore(int id)
         {
             var store = await _context.Store
                .Select(store => new StoreDTO
@@ -150,6 +150,27 @@ namespace BaristaBuddyApi.Repositories
 
             return store;
         }
+        public async Task<Store> FindAStore(int id)
+        {
+            var store = await _context.Store
+               //.Select(store => new Store
+               //{
+               //    Id = store.Id,
+               //    Name = store.Name,
+               //    StreetAddress = store.StreetAddress,
+               //    City = store.City,
+               //    State = store.State,
+               //    Zip = store.Zip,
+               //    Phone = store.Phone,
+               //    WebsiteUrl = store.WebsiteUrl,
+               //    StoreImageUrl = store.StoreImageUrl,
+
+
+               //})
+               .FirstOrDefaultAsync(store => store.Id == id);
+
+            return store;
+        }
 
 
 
@@ -158,7 +179,7 @@ namespace BaristaBuddyApi.Repositories
             _context.Store.Add(store);
             await _context.SaveChangesAsync();
 
-            return await GetOneSTore(store.Id);
+            return await GetOneStore(store.Id);
         }
 
 
