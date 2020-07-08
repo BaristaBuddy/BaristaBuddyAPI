@@ -7,7 +7,6 @@ namespace BaristaBuddyApi.Models.Identity
     {
         public int Id { get; set; }
         public int OrderId { get; set; }
-
         public int ItemId { get; set; }
         public Orders Order { get; set; }
         public Item Item { get; set; }
