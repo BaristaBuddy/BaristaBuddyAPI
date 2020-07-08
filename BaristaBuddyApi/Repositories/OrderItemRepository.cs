@@ -1,6 +1,7 @@
 ﻿using BaristaBuddyApi.Data;
 using BaristaBuddyApi.Models.DTO;
 using BaristaBuddyApi.Models.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
 using System.Collections.Generic;
@@ -24,13 +25,30 @@ namespace BaristaBuddyApi.Repositories
 
             await _context.SaveChangesAsync();
 
-            return await GetOneOrder(orderItem.Id);
+            return await GetOneOrderItem(orderItem.Id);
 
         }
 
         public Task<OrderItemDTO> DeleteOrderItem(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<OrderItemDTO> GetOneOrderItem(int id)
+        {
+            var orderItem = await _context.OrderItem
+                .Where(oi=> oi.Id==id)
+               .Select(oi => new OrderItemDTO
+               {
+                  Price=oi.Item.Price,
+                  Name=oi.Item.Name,
+                  ImageUrl=oi.Item.ImageUrl,
+                  Quantity=oi.Quantity,
+                  Size=oi.Size,
+                  AdditionalCost=oi.AdditionalCost,
+               }).ToListAsync();
+
+            return orderItem;
         }
 
         public Task<bool> UptadeOrderItem(int id, OrderItem orderItem)

@@ -78,6 +78,8 @@ namespace BaristaBuddyApi
 
             services.AddTransient<IOrdersRepository, OrdersRepository>();
 
+            services.AddTransient<IOrderItemRepository, OrderItemRepository>();
+
             services.AddTransient<IUserManager, UserManagerWrapper>();
 
             services.AddTransient<IStoreRepository, StoreRepository>();

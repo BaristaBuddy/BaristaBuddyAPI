@@ -13,4 +13,5 @@ namespace BaristaBuddyApi.Repositories
         Task<OrderItemDTO> DeleteOrderItem(int id);
         Task<bool> UptadeOrderItem(int id, OrderItem orderItem);
         Task<OrderItemDTO> GetOneOrderItem(int id);
+    }
 }
