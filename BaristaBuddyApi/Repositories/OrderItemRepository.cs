@@ -55,7 +55,7 @@ namespace BaristaBuddyApi.Repositories
                .Select(oi => new OrderItemDTO
                {
                    Id=oi.Id,
-                  
+                  ItemId=oi.ItemId,
                   OrderId=oi.OrderId,
                   Price=oi.Item.Price,
                   Name=oi.Item.Name,
