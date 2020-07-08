@@ -18,11 +18,13 @@ namespace BaristaBuddyApi.Controllers
     {
         IOrdersRepository orderRepository;
         private readonly IUserManager userManager;
+        IStoreRepository storeRepository;
 
-        public OrdersController(IOrdersRepository orderRepository, IUserManager thisUserManager)
+        public OrdersController(IOrdersRepository orderRepository, IUserManager thisUserManager, IStoreRepository thisStoreRepository )
         {
             this.orderRepository = orderRepository;
             this.userManager = thisUserManager;
+            this.storeRepository = thisStoreRepository;
         }
 
         // GET: api/ordes made by user
@@ -68,9 +70,10 @@ namespace BaristaBuddyApi.Controllers
                 {
                     return Unauthorized();
                 }
+                var thisStore = await storeRepository.FindAStore(orderData.storeId);
                 Orders order = new Orders()
                 {
-                    storeId = orderData.storeId,
+                    store = thisStore,
                     user = thisUser
                 };
 
