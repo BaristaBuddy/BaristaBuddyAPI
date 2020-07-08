@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using BaristaBuddyApi.Models.DTO;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BaristaBuddyApi.Models.Identity
 {
@@ -9,7 +10,7 @@ namespace BaristaBuddyApi.Models.Identity
 
         public int ItemId { get; set; }
         public Orders Order { get; set; }
-        public Item Item { get; set; }
+        public ItemDTO Item { get; set; }
         public int Quantity { get; set; }
         public string Size { get; set; }
 

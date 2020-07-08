@@ -20,10 +20,11 @@ namespace BaristaBuddyApi.Controllers
         }
 
         // GET: api/ordes made by user
-        [HttpGet("{userid}")]
-        public async Task<ActionResult<IEnumerable<Orders>>> GetOrders(string userid)
+        
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Orders>>> GetOrders()
         {
-            return Ok(await orderRepository.GetAllOrders(userid));
+            return Ok(await orderRepository.GetAllOrders());
 
         }
 

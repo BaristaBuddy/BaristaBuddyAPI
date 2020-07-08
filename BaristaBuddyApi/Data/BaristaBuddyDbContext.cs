@@ -110,7 +110,23 @@ namespace BaristaBuddyApi.Data
                 new ItemSize { ItemId = 4, Size = "Giant", AdditionalCost = 1.00M }
                 );
 
-         
+            modelBuilder.Entity<OrderItem>()
+                  .HasData(
+
+                  new OrderItem {Id=1, ItemId = 2, OrderId = 1, Quantity = 1 },
+                  new OrderItem {Id=2, ItemId = 3, OrderId = 1, Quantity = 1 },
+                  new OrderItem {Id=3,ItemId = 4, OrderId = 2, Quantity = 1 },
+                  new OrderItem {Id=4,ItemId = 4, OrderId = 3, Quantity = 1 },
+                  new OrderItem {Id=5,ItemId = 4, OrderId = 4, Quantity = 1 }
+                  );
+
+            modelBuilder.Entity<Orders>()
+                  .HasData(
+                  new Orders {Id =1  ,PickupName = "sihem", OrderTime =DateTime.UtcNow , PickupTime=DateTime.UtcNow},
+                  new Orders { Id =2,PickupName = "brannan", OrderTime = DateTime.UtcNow, PickupTime = DateTime.UtcNow },
+                  new Orders { Id =3, PickupName = "matt", OrderTime = DateTime.UtcNow, PickupTime = DateTime.UtcNow },
+                  new Orders { Id = 4, PickupName = "james", OrderTime = DateTime.UtcNow, PickupTime = DateTime.UtcNow }
+                  );
 
 
         }

@@ -28,22 +28,26 @@ namespace BaristaBuddyApi.Repositories
                {
                    PickupName = order.PickupName,
                    OrderTime = order.OrderTime,
-                   OrderItem= order.OrderItem
-                   .Where(o=> o.OrderId == id)
-                   .Select(ot=> new OrderItem { 
-                       ItemId=ot.ItemId,
+                   OrderItem= order.OrderItem                   
+                   .Select(ot=> new OrderItem
+                   { 
+                       Item = ot.Item
+                       .Select(it=> new ItemDTO
+                       { 
+                          
+                       }).ToList(),
                    }).ToList()
                }).FirstOrDefaultAsync();
 
             return order;
         }
 
-        public async Task<Orders> GetAllOrders(string userid)
+        public async Task<Orders> GetAllOrders()
         {
             var order = await _context.Order
-                .Where(o=>o.User.Id==userid)
                 .Select(order => new Orders
                 {
+                    Id=order.Id,
                     PickupName = order.PickupName,
                     OrderTime = order.OrderTime,
                     OrderItem = order.OrderItem
@@ -56,6 +60,52 @@ namespace BaristaBuddyApi.Repositories
             return order;
         }
 
+      
 
+        public async Task<bool> UpdateOrder(int id, Orders order)
+        {
+            _context.Entry(order).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!OrderExists(id))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+
+            }
+        }
+        private bool OrderExists(int id)
+        {
+            return _context.Store.Any(e => e.Id == id);
+
+        }
+
+        public async Task<Orders> SaveNew(Orders order)
+        {
+            _context.Order.Add(order);
+            await _context.SaveChangesAsync();
+
+            return await GetOneOrder(order.Id);
+        }
+
+        public Task<Orders> DeleteOrder(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<IEnumerable<Orders>> IOrdersRepository.GetAllOrders()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
