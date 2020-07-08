@@ -8,6 +8,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200707163554_addOrdersModels.cs" />
     <Compile Remove="Migrations\20200707163554_addOrdersModels.Designer.cs" />
+    <Compile Remove="Migrations\20200708162146_addInverseNavPropToUser.cs" />
+    <Compile Remove="Migrations\20200708162146_addInverseNavPropToUser.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
