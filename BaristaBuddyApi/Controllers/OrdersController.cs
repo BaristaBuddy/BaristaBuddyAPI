@@ -39,7 +39,7 @@ namespace BaristaBuddyApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> PutOrder( int id,Orders order)
+        public async Task<ActionResult> PutOrder(int id, Orders order)
         {
             if (id != order.Id)
             {
@@ -83,8 +83,9 @@ namespace BaristaBuddyApi.Controllers
                 return CreatedAtAction(nameof(GetOneOrder), new { id = order.Id }, order);
             }
             return Unauthorized();
-
         }
+
+        
     }
  }
 

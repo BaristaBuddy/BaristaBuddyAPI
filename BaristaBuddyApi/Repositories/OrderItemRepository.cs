@@ -3,6 +3,7 @@ using BaristaBuddyApi.Models.DTO;
 using BaristaBuddyApi.Models.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using SQLitePCL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace BaristaBuddyApi.Repositories
 
         }
 
-        public async Task<OrderItemDTO> DeleteOrderItem(int id)
+        public async Task<OrderItemDTO> DeleteOrderItem (int id)
         {
             var orderItem = await _context.OrderItem.FindAsync(id);
 
@@ -38,22 +39,24 @@ namespace BaristaBuddyApi.Repositories
                 return null;
             }
 
-            var storeToReturn = await GetOneOrderItem(id);
+            var OrderItemToReturn = await GetOneOrderItem(id);
 
             _context.OrderItem.Remove(orderItem);
 
-
             await _context.SaveChangesAsync();
 
-            return storeToReturn;
+            return OrderItemToReturn;
         }
-
+        
         public async Task<OrderItemDTO> GetOneOrderItem(int id)
         {
             var orderItem = await _context.OrderItem
                 .Where(oi=> oi.Id==id)
                .Select(oi => new OrderItemDTO
                {
+                   Id=oi.Id,
+                  ItemId=oi.ItemId,
+                  OrderId=oi.OrderId,
                   Price=oi.Item.Price,
                   Name=oi.Item.Name,
                   ImageUrl=oi.Item.ImageUrl,
@@ -91,5 +94,8 @@ namespace BaristaBuddyApi.Repositories
         {
             return _context.Store.Any(e => e.Id == id);
         }
+
+       
+       
     }
 }
