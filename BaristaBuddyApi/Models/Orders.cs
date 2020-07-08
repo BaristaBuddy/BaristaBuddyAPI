@@ -15,7 +15,7 @@ namespace BaristaBuddyApi.Models
         public DateTime? PickupTime { get; set; }
         public DateTime? OrderTime { get; set; }
         public string PickupName { get; set; }
-        public BaristaBuddyUser User{ get; set;}
+        public BaristaBuddyUser user{ get; set;}
         public List <OrderItem> OrderItem { get; set;}
 
     }

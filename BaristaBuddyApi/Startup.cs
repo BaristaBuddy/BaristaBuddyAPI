@@ -22,12 +22,14 @@ using BaristaBuddyApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BaristaBuddyApi
 {
     public class Startup
     {
-       
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -109,6 +111,14 @@ namespace BaristaBuddyApi
                         Url = new Uri("https://example.com/license"),
                     }
                 });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                });
+                c.OperationFilter<AuthenticationRequirementOperationFilter>();
             });
 
         }
@@ -125,7 +135,7 @@ namespace BaristaBuddyApi
 
             app.UseRouting();
 
-            
+
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -150,6 +160,30 @@ namespace BaristaBuddyApi
             {
                 endpoints.MapControllers();
             });
+        }
+        private class AuthenticationRequirementOperationFilter : IOperationFilter
+        {
+            public void Apply(OpenApiOperation operation, OperationFilterContext context)
+            {
+                var hasAnonymous = context.ApiDescription.CustomAttributes().OfType<AllowAnonymousAttribute>().Any();
+                if (hasAnonymous)
+                    return;
+
+                operation.Security ??= new List<OpenApiSecurityRequirement>();
+
+                var scheme = new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Id = "Bearer",
+                        Type = ReferenceType.SecurityScheme,
+                    },
+                };
+                operation.Security.Add(new OpenApiSecurityRequirement
+                {
+                    [scheme] = new List<string>()
+                });
+            }
         }
     }
 }

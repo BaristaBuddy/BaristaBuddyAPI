@@ -19,10 +19,10 @@ namespace BaristaBuddyApi.Controllers
         IOrdersRepository orderRepository;
         private readonly IUserManager userManager;
 
-        public OrdersController(IOrdersRepository orderRepository)
+        public OrdersController(IOrdersRepository orderRepository, IUserManager thisUserManager)
         {
             this.orderRepository = orderRepository;
-            this.userManager = userManager;
+            this.userManager = thisUserManager;
         }
 
         // GET: api/ordes made by user
@@ -55,22 +55,31 @@ namespace BaristaBuddyApi.Controllers
         }
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult<OrderDTO>> PostOrder(Orders order)
+        public async Task<ActionResult<OrderDTO>> PostOrder(CreateOrder orderData)
         {
+            
             if (HttpContext.User.Identity is ClaimsIdentity identity)
             {
                 var usernameClaim = identity.FindFirst("UserId");
                 var userId = usernameClaim.Value;
 
-                var user = await userManager.FindByIdAsync(userId);
-                if (user == null)
+                var thisUser = await userManager.FindByIdAsync(userId);
+                if (thisUser == null)
                 {
                     return Unauthorized();
                 }
-            }
+                Orders order = new Orders()
+                {
+                    storeId = orderData.storeId,
+                    user = thisUser
+                };
+
             await orderRepository.SaveNewOrder(order);
 
             return CreatedAtAction("GetOrder", new { id = order.Id }, order);
+        }
+            return Unauthorized();
+
         }
     }
  }
