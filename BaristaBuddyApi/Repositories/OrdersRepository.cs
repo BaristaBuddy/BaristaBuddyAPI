@@ -26,7 +26,21 @@ namespace BaristaBuddyApi.Repositories
                 .Where(o=> o.Id==id)
                .Select(order => new OrderDTO
                {
-                  
+                  Id=order.Id,
+                  PickupName=order.PickupName,
+                  PickupTime=order.PickupTime,
+                  OrderTime=order.OrderTime,
+                  OrderItem=order.OrderItem
+                  .Select(oi =>new OrderItemDTO
+                  {
+                      Id=oi.Id,
+                      Name= oi.Item.Name,
+                      ImageUrl= oi.Item.ImageUrl,
+                      Price= oi.Item.Price,
+                      Quantity=oi.Quantity,
+                      AdditionalCost= oi.AdditionalCost,
+                      Size=oi.Size
+                  }).ToList()
                                
              
                }).FirstOrDefaultAsync();
