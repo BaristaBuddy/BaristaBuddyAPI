@@ -153,20 +153,21 @@ namespace BaristaBuddyApi.Repositories
         public async Task<Store> FindAStore(int id)
         {
             var store = await _context.Store
-               .Select(store => new Store
-               {
-                   Id = store.Id,
-                   Name = store.Name,
-                   StreetAddress = store.StreetAddress,
-                   City = store.City,
-                   State = store.State,
-                   Zip = store.Zip,
-                   Phone = store.Phone,
-                   WebsiteUrl = store.WebsiteUrl,
-                   StoreImageUrl = store.StoreImageUrl,
+               //.Select(store => new Store
+               //{
+               //    Id = store.Id,
+               //    Name = store.Name,
+               //    StreetAddress = store.StreetAddress,
+               //    City = store.City,
+               //    State = store.State,
+               //    Zip = store.Zip,
+               //    Phone = store.Phone,
+               //    WebsiteUrl = store.WebsiteUrl,
+               //    StoreImageUrl = store.StoreImageUrl,
 
 
-               }).FirstOrDefaultAsync(store => store.Id == id);
+               //})
+               .FirstOrDefaultAsync(store => store.Id == id);
 
             return store;
         }

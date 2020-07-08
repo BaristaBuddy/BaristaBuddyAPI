@@ -73,14 +73,14 @@ namespace BaristaBuddyApi.Controllers
                 var thisStore = await storeRepository.FindAStore(orderData.storeId);
                 Orders order = new Orders()
                 {
-                    storeId = orderData.storeId,
-                    //store = thisStore,
-                    //user = thisUser
+                    StoreId = orderData.storeId,
+                    Store = thisStore,
+                    User = thisUser
                 };
 
                 await orderRepository.SaveNewOrder(order);
 
-                return CreatedAtAction("GetOrder", new { id = order.Id }, order);
+                return CreatedAtAction(nameof(GetOneOrder), new { id = order.Id }, order);
             }
             return Unauthorized();
 

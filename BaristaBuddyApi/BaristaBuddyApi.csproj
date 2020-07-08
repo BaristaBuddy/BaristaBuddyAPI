@@ -14,6 +14,12 @@
     <Compile Remove="Migrations\20200708184458_AddInverseNavToStore.Designer.cs" />
     <Compile Remove="Migrations\20200708184627_testing.cs" />
     <Compile Remove="Migrations\20200708184627_testing.Designer.cs" />
+    <Compile Remove="Migrations\20200708190308_testing.cs" />
+    <Compile Remove="Migrations\20200708190308_testing.Designer.cs" />
+    <Compile Remove="Migrations\20200708191806_AddStoreIdToOrder.cs" />
+    <Compile Remove="Migrations\20200708191806_AddStoreIdToOrder.Designer.cs" />
+    <Compile Remove="Migrations\20200708191949_AddStoreIdToOrder.cs" />
+    <Compile Remove="Migrations\20200708191949_AddStoreIdToOrder.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
