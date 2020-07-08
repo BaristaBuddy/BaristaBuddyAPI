@@ -46,14 +46,36 @@ namespace BaristaBuddyApi.Repositories
                   Quantity=oi.Quantity,
                   Size=oi.Size,
                   AdditionalCost=oi.AdditionalCost,
-               }).ToListAsync();
+               }).FirstOrDefaultAsync();
 
             return orderItem;
         }
 
-        public Task<bool> UptadeOrderItem(int id, OrderItem orderItem)
+        public async Task<bool> UptadeOrderItem(int id, OrderItem orderItem)
         {
-            throw new NotImplementedException();
+            _context.Entry(orderItem).State = EntityState.Modified;
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!OrderItemExists(id))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+
+            }
+        }
+
+        public bool OrderItemExists(int id)
+        {
+            return _context.Store.Any(e => e.Id == id);
         }
     }
 }
