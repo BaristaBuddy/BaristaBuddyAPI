@@ -11,7 +11,7 @@ namespace BaristaBuddyApi.Repositories
     public interface IOrdersRepository
     {
         Task<OrderDTO> GetOneOrder(int id);
-      
+        Task<bool> UpdateOrder(int id,Orders order);
         Task<OrderDTO> SaveNewOrder(Orders order);
     }
 }

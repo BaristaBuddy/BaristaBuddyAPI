@@ -32,9 +32,22 @@ namespace BaristaBuddyApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<OrderDTO>> postOrder(Orders order)
+        public async Task<ActionResult<OrderDTO>> PutOrder( int id,Orders order)
         {
-            return null;
+            if (id != order.Id)
+            {
+                return BadRequest();
+            }
+
+            bool didUpdate = await orderRepository.UpdateOrder(id, order);
+
+            if (!didUpdate)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
         }
     }
-}
+ }
+
