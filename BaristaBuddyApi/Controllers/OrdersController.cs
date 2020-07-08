@@ -21,12 +21,6 @@ namespace BaristaBuddyApi.Controllers
 
         // GET: api/ordes made by user
         
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Orders>>> GetOrders()
-        {
-            return Ok(await orderRepository.GetAllOrders());
-
-        }
 
         // GET: api/ordes
         [HttpGet ("{id}")]
@@ -34,6 +28,12 @@ namespace BaristaBuddyApi.Controllers
         public async Task<ActionResult<Orders>> GetOneOrder(int id)
         {
             return Ok(await orderRepository.GetOneOrder(id));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Orders>> postOrder(Orders order)
+        {
+
         }
     }
 }

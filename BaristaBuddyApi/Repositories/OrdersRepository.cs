@@ -42,26 +42,9 @@ namespace BaristaBuddyApi.Repositories
             return order;
         }
 
-        public async Task<Orders> GetAllOrders()
-        {
-            var order = await _context.Order
-                .Select(order => new Orders
-                {
-                    Id=order.Id,
-                    PickupName = order.PickupName,
-                    OrderTime = order.OrderTime,
-                    OrderItem = order.OrderItem
-                   .Select(ot => new OrderItem
-                   {
-                       ItemId = ot.ItemId,
-                   }).ToList(),
-               }).FirstOrDefaultAsync();
 
-            return order;
-        }
 
-      
-
+     
         public async Task<bool> UpdateOrder(int id, Orders order)
         {
             _context.Entry(order).State = EntityState.Modified;
