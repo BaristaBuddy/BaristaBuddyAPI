@@ -11,7 +11,7 @@ namespace BaristaBuddyApi.Controllers
 {
     [Route("Api/[Controller]")]
     [ApiController]
-    public class OrdersController :ControllerBase
+    public class OrdersController : ControllerBase
     {
         IOrdersRepository orderRepository;
 
@@ -21,18 +21,18 @@ namespace BaristaBuddyApi.Controllers
         }
 
         // GET: api/ordes made by user
-        
+
 
         // GET: api/ordes
-        [HttpGet ("{id}")]
+        [HttpGet("{id}")]
 
         public async Task<ActionResult<OrderDTO>> GetOneOrder(int id)
         {
             return Ok(await orderRepository.GetOneOrder(id));
         }
 
-        [HttpPost]
-        public async Task<ActionResult<OrderDTO>> PutOrder( int id,Orders order)
+        [HttpPut("{id}")]
+        public async Task<ActionResult> PutOrder( int id,Orders order)
         {
             if (id != order.Id)
             {
@@ -47,6 +47,15 @@ namespace BaristaBuddyApi.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpPost]
+
+        public async Task<ActionResult<OrderDTO>> PostOrder(Orders order)
+        {
+            await orderRepository.SaveNewOrder(order);
+
+            return CreatedAtAction("GetOrder", new { id = order.Id }, order);
         }
     }
  }

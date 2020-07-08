@@ -10,6 +10,8 @@ namespace BaristaBuddyApi.Models
     public class Orders
     {
         public int Id { get; set; }
+        public int storeId { get; set;}
+        public Store store { get; set; }
         public DateTime? PickupTime { get; set; }
         public DateTime? OrderTime { get; set; }
         public string PickupName { get; set; }
