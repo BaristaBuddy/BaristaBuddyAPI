@@ -34,7 +34,7 @@ namespace BaristaBuddyApi.Controllers
             return orderItem;
         }
 
-        [HttpDelete]
+        [HttpDelete ("{id}")]
 
         public async Task<ActionResult<OrderItemDTO>> DeleteOrderItem (int id)
         {
