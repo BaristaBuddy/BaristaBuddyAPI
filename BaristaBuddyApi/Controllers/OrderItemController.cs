@@ -33,5 +33,17 @@ namespace BaristaBuddyApi.Controllers
 
             return orderItem;
         }
+
+        [HttpDelete]
+
+        public async Task<ActionResult<OrderItemDTO>> DeleteOrderItem (int id)
+        {
+            var orderItem  = await orderItemRepository.DeleteOrderItem(id);
+            if (orderItem== null)
+            {
+                return NotFound();
+            }
+            return orderItem;
+        }
     }
 }

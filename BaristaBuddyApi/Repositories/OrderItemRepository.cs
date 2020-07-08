@@ -29,24 +29,7 @@ namespace BaristaBuddyApi.Repositories
 
         }
 
-        public async Task<OrderItemDTO> DeleteOrderItem(int id)
-        {
-            var orderItem = await _context.OrderItem.FindAsync(id);
-
-            if (orderItem == null)
-            {
-                return null;
-            }
-
-            var storeToReturn = await GetOneOrderItem(id);
-
-            _context.OrderItem.Remove(orderItem);
-
-
-            await _context.SaveChangesAsync();
-
-            return storeToReturn;
-        }
+ 
 
         public async Task<OrderItemDTO> GetOneOrderItem(int id)
         {
@@ -54,6 +37,8 @@ namespace BaristaBuddyApi.Repositories
                 .Where(oi=> oi.Id==id)
                .Select(oi => new OrderItemDTO
                {
+                   Id=oi.Id,
+                  OrderId=oi.OrderId,
                   Price=oi.Item.Price,
                   Name=oi.Item.Name,
                   ImageUrl=oi.Item.ImageUrl,
@@ -90,6 +75,25 @@ namespace BaristaBuddyApi.Repositories
         public bool OrderItemExists(int id)
         {
             return _context.Store.Any(e => e.Id == id);
+        }
+
+       
+        public async Task<OrderItemDTO> DeleteOrderItem(int id)
+        {
+            var orderItem = await _context.Order.FindAsync(id);
+
+            if (orderItem == null)
+            {
+                return null;
+            }
+
+            var OrderItemToReturn = await GetOneOrderItem(id);
+
+            _context.Order.Remove(orderItem);
+
+            await _context.SaveChangesAsync();
+
+            return OrderItemToReturn;
         }
     }
 }
