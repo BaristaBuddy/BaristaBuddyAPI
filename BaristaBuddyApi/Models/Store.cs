@@ -23,5 +23,6 @@ namespace BaristaBuddyApi.Models
         // Inverse navigation properties
         public List<Item> Items { get; set; }
         public List<StoreModifier> Modifiers { get; set; }
+
     }
 }

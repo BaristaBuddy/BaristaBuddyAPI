@@ -67,7 +67,7 @@ namespace BaristaBuddyApi.Services
             };
 
                 var token = new JwtSecurityToken(
-                    expires: DateTime.UtcNow.AddSeconds(10),
+                    expires: DateTime.UtcNow.AddSeconds(36000),
                     claims: tokenClaims,
                     signingCredentials: new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256)
                     );
