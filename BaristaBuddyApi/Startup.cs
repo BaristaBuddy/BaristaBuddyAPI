@@ -76,6 +76,7 @@ namespace BaristaBuddyApi
                     };
                 });
 
+            services.AddTransient<IOrdersRepository, OrdersRepository>();
 
             services.AddTransient<IUserManager, UserManagerWrapper>();
 

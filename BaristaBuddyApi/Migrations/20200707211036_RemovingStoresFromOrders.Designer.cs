@@ -4,14 +4,16 @@ using BaristaBuddyApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BaristaBuddyApi.Migrations
 {
     [DbContext(typeof(BaristaBuddyDbContext))]
-    partial class BaristaBuddyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200707211036_RemovingStoresFromOrders")]
+    partial class RemovingStoresFromOrders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,48 +129,6 @@ namespace BaristaBuddyApi.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("OrderItem");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AdditionalCost = 0m,
-                            ItemId = 2,
-                            OrderId = 1,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AdditionalCost = 0m,
-                            ItemId = 3,
-                            OrderId = 1,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AdditionalCost = 0m,
-                            ItemId = 4,
-                            OrderId = 2,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AdditionalCost = 0m,
-                            ItemId = 4,
-                            OrderId = 3,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AdditionalCost = 0m,
-                            ItemId = 4,
-                            OrderId = 4,
-                            Quantity = 1
-                        });
                 });
 
             modelBuilder.Entity("BaristaBuddyApi.Models.Item", b =>
@@ -385,36 +345,6 @@ namespace BaristaBuddyApi.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Order");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            OrderTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(4300),
-                            PickupName = "sihem",
-                            PickupTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(4751)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            OrderTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(5119),
-                            PickupName = "brannan",
-                            PickupTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(5127)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            OrderTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(5134),
-                            PickupName = "matt",
-                            PickupTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(5135)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            OrderTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(5136),
-                            PickupName = "james",
-                            PickupTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(5137)
-                        });
                 });
 
             modelBuilder.Entity("BaristaBuddyApi.Models.Store", b =>

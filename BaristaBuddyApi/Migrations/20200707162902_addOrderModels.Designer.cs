@@ -4,14 +4,16 @@ using BaristaBuddyApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BaristaBuddyApi.Migrations
 {
     [DbContext(typeof(BaristaBuddyDbContext))]
-    partial class BaristaBuddyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200707162902_addOrderModels")]
+    partial class addOrderModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,79 +98,6 @@ namespace BaristaBuddyApi.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("BaristaBuddyApi.Models.Identity.OrderItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("AdditionalCost")
-                        .HasColumnType("money");
-
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Size")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ItemId");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("OrderItem");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AdditionalCost = 0m,
-                            ItemId = 2,
-                            OrderId = 1,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AdditionalCost = 0m,
-                            ItemId = 3,
-                            OrderId = 1,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AdditionalCost = 0m,
-                            ItemId = 4,
-                            OrderId = 2,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AdditionalCost = 0m,
-                            ItemId = 4,
-                            OrderId = 3,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AdditionalCost = 0m,
-                            ItemId = 4,
-                            OrderId = 4,
-                            Quantity = 1
-                        });
                 });
 
             modelBuilder.Entity("BaristaBuddyApi.Models.Item", b =>
@@ -358,62 +287,6 @@ namespace BaristaBuddyApi.Migrations
                             ItemId = 4,
                             Size = "Giant",
                             AdditionalCost = 1.00m
-                        });
-                });
-
-            modelBuilder.Entity("BaristaBuddyApi.Models.Orders", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime?>("OrderTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PickupName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("PickupTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Order");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            OrderTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(4300),
-                            PickupName = "sihem",
-                            PickupTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(4751)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            OrderTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(5119),
-                            PickupName = "brannan",
-                            PickupTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(5127)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            OrderTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(5134),
-                            PickupName = "matt",
-                            PickupTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(5135)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            OrderTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(5136),
-                            PickupName = "james",
-                            PickupTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(5137)
                         });
                 });
 
@@ -662,21 +535,6 @@ namespace BaristaBuddyApi.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("BaristaBuddyApi.Models.Identity.OrderItem", b =>
-                {
-                    b.HasOne("BaristaBuddyApi.Models.Item", "Item")
-                        .WithMany()
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BaristaBuddyApi.Models.Orders", "Order")
-                        .WithMany("OrderItem")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("BaristaBuddyApi.Models.Item", b =>
                 {
                     b.HasOne("BaristaBuddyApi.Models.Store", "Store")
@@ -708,13 +566,6 @@ namespace BaristaBuddyApi.Migrations
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("BaristaBuddyApi.Models.Orders", b =>
-                {
-                    b.HasOne("BaristaBuddyApi.Models.Identity.BaristaBuddyUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("BaristaBuddyApi.Models.StoreModifier", b =>

@@ -4,14 +4,16 @@ using BaristaBuddyApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BaristaBuddyApi.Migrations
 {
     [DbContext(typeof(BaristaBuddyDbContext))]
-    partial class BaristaBuddyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200707164527_FixOrderModel")]
+    partial class FixOrderModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,14 +107,14 @@ namespace BaristaBuddyApi.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("AdditionalCost")
-                        .HasColumnType("money");
-
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("money");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -127,48 +129,6 @@ namespace BaristaBuddyApi.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("OrderItem");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AdditionalCost = 0m,
-                            ItemId = 2,
-                            OrderId = 1,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AdditionalCost = 0m,
-                            ItemId = 3,
-                            OrderId = 1,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AdditionalCost = 0m,
-                            ItemId = 4,
-                            OrderId = 2,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AdditionalCost = 0m,
-                            ItemId = 4,
-                            OrderId = 3,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AdditionalCost = 0m,
-                            ItemId = 4,
-                            OrderId = 4,
-                            Quantity = 1
-                        });
                 });
 
             modelBuilder.Entity("BaristaBuddyApi.Models.Item", b =>
@@ -377,44 +337,19 @@ namespace BaristaBuddyApi.Migrations
                     b.Property<DateTime?>("PickupTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("StoreId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("StoreId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Order");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            OrderTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(4300),
-                            PickupName = "sihem",
-                            PickupTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(4751)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            OrderTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(5119),
-                            PickupName = "brannan",
-                            PickupTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(5127)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            OrderTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(5134),
-                            PickupName = "matt",
-                            PickupTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(5135)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            OrderTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(5136),
-                            PickupName = "james",
-                            PickupTime = new DateTime(2020, 7, 7, 21, 29, 25, 375, DateTimeKind.Utc).AddTicks(5137)
-                        });
                 });
 
             modelBuilder.Entity("BaristaBuddyApi.Models.Store", b =>
@@ -671,7 +606,7 @@ namespace BaristaBuddyApi.Migrations
                         .IsRequired();
 
                     b.HasOne("BaristaBuddyApi.Models.Orders", "Order")
-                        .WithMany("OrderItem")
+                        .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -712,6 +647,12 @@ namespace BaristaBuddyApi.Migrations
 
             modelBuilder.Entity("BaristaBuddyApi.Models.Orders", b =>
                 {
+                    b.HasOne("BaristaBuddyApi.Models.Store", "Store")
+                        .WithMany()
+                        .HasForeignKey("StoreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("BaristaBuddyApi.Models.Identity.BaristaBuddyUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
