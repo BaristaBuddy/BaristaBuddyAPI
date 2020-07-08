@@ -170,6 +170,12 @@ namespace BaristaBuddyApi.Repositories
                        ModifierName = thisIm.Modifier.Name,
                        AdditionalCost = thisIm.AdditionalCost
                    }).ToList(),
+                   ItemSizes = item.ItemSizes
+                   .Select(thisSize => new ItemSizeDTO {
+                   Size = thisSize.Size,
+                   AdditionalCost = thisSize.AdditionalCost
+                   }
+                   ).ToList(),
                     Price = item.Price
                 }
 
