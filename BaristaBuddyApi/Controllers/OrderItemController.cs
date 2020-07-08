@@ -16,14 +16,14 @@ namespace BaristaBuddyApi.Controllers
     public class OrderItemController : ControllerBase
     {
         IOrderItemRepository orderItemRepository;
-        
-        public OrderItemController ( IOrderItemRepository orderItemRepository)
+
+        public OrderItemController(IOrderItemRepository orderItemRepository)
         {
             this.orderItemRepository = orderItemRepository;
         }
 
         [HttpGet("{id}")]
-        public async  Task<ActionResult<OrderItemDTO> > GetOrderItem (int id )
+        public async Task<ActionResult<OrderItemDTO>> GetOrderItem(int id)
         {
             var orderItem = await orderItemRepository.GetOneOrderItem(id);
 
@@ -35,25 +35,47 @@ namespace BaristaBuddyApi.Controllers
             return orderItem;
         }
 
-        [HttpDelete ("{id}")]
+        [HttpDelete("{id}")]
 
-        public async Task<ActionResult<OrderItemDTO>> DeleteOrderItem (int id)
+        public async Task<ActionResult<OrderItemDTO>> DeleteOrderItem(int id)
         {
-            var orderItem  = await orderItemRepository.DeleteOrderItem(id);
-            if (orderItem== null)
+            var orderItem = await orderItemRepository.DeleteOrderItem(id);
+            if (orderItem == null)
             {
                 return NotFound();
             }
             return orderItem;
         }
 
-        [HttpPost] 
-        public async Task<ActionResult<OrderItem>> PostOrderItem (OrderItem orderItem)
+        [HttpPost]
+        public async Task<ActionResult<OrderItem>> PostOrderItem(OrderItem orderItem)
         {
             await orderItemRepository.CreateNewOrderItem(orderItem);
 
             return CreatedAtAction("GetOrderItem", new { id = orderItem.Id }, orderItem);
 
+        }
+
+        [HttpPut("{id}")]
+        
+        public async Task<ActionResult<bool>> PostOrderItem(int id, OrderItem orderItem)
+        {
+            
+            if (id != orderItem.Id)
+            {
+                return BadRequest();
+            }
+
+            bool didUpdate = await orderItemRepository.UptadeOrderItem(id,orderItem);
+
+            if (!didUpdate)
+            {
+                return NotFound();
+            }
+
+
+
+            return NoContent();
         }
     }
 }
