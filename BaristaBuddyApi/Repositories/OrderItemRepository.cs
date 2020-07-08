@@ -29,9 +29,23 @@ namespace BaristaBuddyApi.Repositories
 
         }
 
-        public Task<OrderItemDTO> DeleteOrderItem(int id)
+        public async Task<OrderItemDTO> DeleteOrderItem(int id)
         {
-            throw new NotImplementedException();
+            var orderItem = await _context.OrderItem.FindAsync(id);
+
+            if (orderItem == null)
+            {
+                return null;
+            }
+
+            var storeToReturn = await GetOneOrderItem(id);
+
+            _context.OrderItem.Remove(orderItem);
+
+
+            await _context.SaveChangesAsync();
+
+            return storeToReturn;
         }
 
         public async Task<OrderItemDTO> GetOneOrderItem(int id)
