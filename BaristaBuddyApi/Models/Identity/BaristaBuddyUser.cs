@@ -10,7 +10,6 @@ namespace BaristaBuddyApi.Models.Identity
     public class BaristaBuddyUser : IdentityUser
     {
         [Required]
-        public int OrderId { get; set; }
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
