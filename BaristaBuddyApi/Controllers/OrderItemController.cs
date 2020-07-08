@@ -1,6 +1,7 @@
 ﻿using BaristaBuddyApi.Data;
 using BaristaBuddyApi.Models;
 using BaristaBuddyApi.Models.DTO;
+using BaristaBuddyApi.Models.Identity;
 using BaristaBuddyApi.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -44,6 +45,15 @@ namespace BaristaBuddyApi.Controllers
                 return NotFound();
             }
             return orderItem;
+        }
+
+        [HttpPost] 
+        public async Task<ActionResult<OrderItem>> PostOrderItem (OrderItem orderItem)
+        {
+            await orderItemRepository.CreateNewOrderItem(orderItem);
+
+            return CreatedAtAction("GetOrderItem", new { id = orderItem.Id }, orderItem);
+
         }
     }
 }
