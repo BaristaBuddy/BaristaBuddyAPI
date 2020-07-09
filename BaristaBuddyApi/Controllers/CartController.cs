@@ -18,7 +18,7 @@ namespace BaristaBuddyApi.Controllers
        [HttpPost]
        public async Task<dynamic> Pay( Cart cart)
         {
-            return await CartRepository.CreatePayement(cart.CardNumber, cart.Month, cart.year, cart.Value, cart.Cvc);
+            return await CartRepository.CreatePayement(cart.CardNumber, cart.Month, cart.Year, cart.Value, cart.Cvc);
         }
     }
 }
