@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace BaristaBuddyApi.Repositories
 {
-    public interface ICartRepository
+    public interface IcartRepository
     {
-        Task<Cart> CreatePayement(string token);
+        Task<Cart> SaveNewCharge(Cart cart);
+        Task<Cart> GetOneCharge (string id);
     }
 }
