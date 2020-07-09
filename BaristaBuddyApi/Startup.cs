@@ -24,6 +24,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.AspNetCore.Authorization;
+using Stripe;
+
 
 namespace BaristaBuddyApi
 {
@@ -42,7 +44,6 @@ namespace BaristaBuddyApi
         {
             services.AddControllers();
             services.AddMvc();
-
             services.AddDbContext<BaristaBuddyDbContext>(options =>
             {
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");
