@@ -46,7 +46,6 @@ namespace BaristaBuddyApi.Repositories
             {
                 return "failed";
             }
-
         }
     }
 }
